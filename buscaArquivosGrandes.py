@@ -19,17 +19,22 @@ def buscaArquivosGrandes():
         sys.exit()
 
     print('Procurando arquivos maiores que ' + size + 'MB em %s...' % (folder))
+    string_final = ''
     # Percorre a árvore em busca de arquivos grandes.
     for foldername, subfolders, filenames in os.walk(folder):
-
         for filename in filenames:
             try:
                 tamanhoArquivo = os.path.getsize(os.path.join(foldername, filename))
                 if tamanhoArquivo > float(size) * 1000000:
-                    print('Arquivo ' + os.path.join(foldername, filename) + ' tem ' + str(round(tamanhoArquivo / 1000000, 2)) + ' MB')
+                    string_saída = 'Arquivo ' + os.path.join(foldername, filename) + ' tem ' + \
+                                    str(round(tamanhoArquivo / 1000000, 2)) + ' MB'
+                    print(string_saída)
+                    string_final += string_saída +'\n'
             except:
-                print('Diretório ' + os.path.join(foldername, filename) + ' não pesquisado')
-
+                string_saída = 'Diretório ' + os.path.join(foldername, filename) + ' não pesquisado'
+                print(string_saída)
+                string_final += string_saída + '\n'
+    codebox(f'Arquivos encontrados de tamanho maior que {size} MB: ', 'Busca Arquivos Grandes:', string_final)
     print('Feito.')
 
 if __name__ == '__main__': # executa se chamado diretamente
