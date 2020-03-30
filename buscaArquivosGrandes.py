@@ -34,7 +34,7 @@ def buscaArquivosGrandes():
                 string_saída = 'Diretório ' + os.path.join(foldername, filename) + ' não pesquisado'
                 print(string_saída)
                 string_final += string_saída + '\n'
-    codebox(f'Arquivos encontrados de tamanho maior que {size} MB: ', 'Busca Arquivos Grandes:', string_final)
+    codebox(f'Arquivos encontrados de tamanho maior que {size} MB: ', 'Busca Arquivos Grandes', string_final)
     print('Feito.')
 
 if __name__ == '__main__': # executa se chamado diretamente
