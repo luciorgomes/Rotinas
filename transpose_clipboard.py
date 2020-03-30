@@ -4,7 +4,6 @@
 
 import pyperclip
 
-
 def transpose_clipboard():
     mem = pyperclip.paste()
     mem = mem.split()
