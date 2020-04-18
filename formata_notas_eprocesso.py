@@ -37,7 +37,7 @@ def formata_texto_nota():
             fonte_cor = '<FONT COLOR="red">'
             sufixo += '</FONT>'
         elif cor == 'Verde':
-            fonte_cor = '<FONT COLOR="red">'
+            fonte_cor = '<FONT COLOR="green">'
             sufixo += '</FONT>'
 
     texto = enterbox(msg='Qual o texto da Nota a ser acrescentada ao processo?', title='Formata texto para Nota',
