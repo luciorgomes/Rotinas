@@ -83,8 +83,3 @@ def run_choices():
 
 if __name__ == '__main__': # executa se chamado diretamente
     run_choices()
-
-
-
-
-
