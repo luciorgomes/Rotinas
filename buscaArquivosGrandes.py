@@ -4,15 +4,27 @@
 import os
 import sys
 from easygui import *
+from tkinter import filedialog
+from tkinter import *
+
 
 def buscaArquivosGrandes():
     # Busca arquivos grandes no diretório informado.
 
     #folder = os.path.abspath(folder) # garante que o path é absoluto
-    folder = diropenbox(msg="Selecione a pasta a ser pesquisada",title='Procurar arquivos grandes')
-    if folder is None:  # se clicou 'cancel'
-        print("Cancel clicked.")
+    root = Tk()
+    root.option_add('*foreground', '#125578')  # altera a cor da fonte
+    root.withdraw()  # esconde a 'root' criada por ser desnecessária
+    folder = filedialog.askdirectory(title="Procurar arquivos grandes - selecione a pasta")
+    try:
+        os.chdir(folder)  # altera o diretório de trabalho para a pasta 'folder'
+    except TypeError:
+        print("Cancelado.")
         sys.exit()
+    # folder = diropenbox(msg="Selecione a pasta a ser pesquisada",title='Procurar arquivos grandes')
+    # if folder is None:  # se clicou 'cancel'
+    #     print("Cancel clicked.")
+    #     sys.exit()
     size = enterbox(msg="Qual o tamanho dos arquivos a serem retornados (MB)?",default='100')
     if size is None:  # se clicou 'cancel'
         print("Cancel clicked.")

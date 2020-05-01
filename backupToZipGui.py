@@ -1,21 +1,29 @@
 #! /usr/bin/python3
 # backupToZip.py - Copia uma pasta e seu conteúdo para um arquivo Zip com nome incrementado.
 
-from easygui import *
+#from easygui import *
 import os
 import sys
 import zipfile
 import datetime
+from tkinter import filedialog
+from tkinter import *
+
 
 def backupToZip():
     # Faz backup do conteúdo do 'folder' em um arquivo Zip.
 
     # abre dialogbox para seleção do folder
-    folder = diropenbox("Selecione a pasta para ser feito o backup")
-    if folder is None:  # se clicou 'cancel'
-        print("Cancel clicked.")
+#    folder = diropenbox("Selecione a pasta para ser feito o backup")
+    root = Tk()
+    root.option_add('*foreground','#125578') # altera a cor da fonte
+    root.withdraw() # esconde a 'root' criada por ser desnecessária
+    folder = filedialog.askdirectory(title="Selecione a pasta para ser feito o backup")
+    try:
+        os.chdir(folder)  # altera o diretório de trabalho para a pasta 'folder'
+    except TypeError:
+        print("Cancelado.")
         sys.exit()
-    os.chdir(folder)  # altera o diretório de trabalho para a pasta 'folder'
 
     # Determina o nome de arquivo que esse código deverá usar conforme os arquivos já existentes
     number = 1
