@@ -21,7 +21,7 @@ def janela_texto(titulo='', label='', texto=''):
     label_topo = tk.Label(root,text=label, width=140, bg='gray', fg='black', anchor='w')
     label_topo.pack()
 
-    text = tk.Text(root)
+    text = tk.Text(root, background='#125487',foreground='orange', font = 'Mono 10')
     text.insert('insert', texto)
     text['width'] = 140
     text['height'] = 43
@@ -34,7 +34,7 @@ def janela_texto(titulo='', label='', texto=''):
     # text.tag_config("here", background="yellow", foreground="blue")
     # text.tag_config("start", background="black", foreground="green")
     # text.tag_config("segunda", background="black", foreground="green")
-    text.tag_config('all', background='#125487',foreground='orange', font = 'Mono 10')
+    #text.tag_config('all', background='#125487',foreground='orange', font = 'Mono 10')
     conteudo = titulo +'\n\n' + label +'\n\n' + texto
     print(conteudo)
     pyperclip.copy(conteudo)

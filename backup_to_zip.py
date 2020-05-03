@@ -6,6 +6,7 @@ import sys
 import zipfile
 import datetime
 import tkinter as tk
+import tkinter.ttk as ttk
 import seleciona_diretório as sd
 
 
@@ -51,9 +52,12 @@ class Application(tk.Frame):
         '''cria os componentes da janela'''
         self.label_dir = tk.Label(self, text='Diretório:')
         self.entry_dir = tk.Entry(self)
-        self.button_dir = tk.Button(self, text='>', image=self.icon, command=self.define_diretorio)
+        self.button_dir = tk.Button(self, text='>', image=self.icon, bg='#31363b', fg='white',
+                                    command=self.define_diretorio)
         # fora do Frame
-        self.button_run = tk.Button(self.master, text='Executar', anchor='n', command=self.testa_e_executa)
+        self.button_run = tk.Button(self.master, text='Executar', anchor='n', bg='#31363b', fg='white',
+                                    command=self.testa_e_executa)
+        self.separator = ttk.Separator(self.master, orient=tk.HORIZONTAL)
         self.saída = tk.Listbox(self.master)
         self.button_dir.bind('<Escape>', self.exit) # com um Esc encera o programa
 
@@ -76,6 +80,7 @@ class Application(tk.Frame):
         self.saída['bg'] = '#33425c'
         self.saída['fg'] = 'orange'
         self.saída['font'] = 'Mono 8'
+        self.separator.pack()
         self.saída.pack()
         self.button_dir.focus()
 

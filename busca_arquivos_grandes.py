@@ -44,13 +44,15 @@ class Application(tk.Frame):
         '''cria os componentes da janela'''
         self.label_dir = tk.Label(self, text='Diretório:')
         self.entry_dir = tk.Entry(self)
-        self.button_dir = tk.Button(self,text='>', image=self.icon, command=self.define_diretorio)
+        self.button_dir = tk.Button(self,text='>', image=self.icon, bg='#31363b', fg='white',
+                                    command=self.define_diretorio)
         # self.button_dir.bind('<Return>',self.define_diretorio)
         self.label_size = tk.Label(self,text='Tamanho(MB):')
         self.entry_size = tk.Entry(self)
         self.entry_size.insert(0,'100')
         # botão fora do Frame
-        self.button_run = tk.Button(self.master, text='Executar',command=self.testa_e_executa)
+        self.button_run = tk.Button(self.master, text='Executar',bg='#31363b', fg='white',
+                                    command=self.testa_e_executa)
         self.button_dir.bind('<Escape>', self.exit) # com um Esc encera o programa
 
     def layout(self):

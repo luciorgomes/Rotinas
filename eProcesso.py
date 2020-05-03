@@ -24,13 +24,13 @@ class Application(tk.Frame):
         self.master.configure(bg='gray')
         # dimensões da janela
         largura = 510
-        altura = 720
+        altura = 680
         # resolução da tela
         largura_screen = self.master.winfo_screenwidth()
         altura_screen = self.master.winfo_screenheight()
         # posição da janela
         posx = largura_screen / 2 - largura / 2  # meio da tela
-        posy = altura_screen / 4 - altura / 2  # meio da primeira tela
+        posy = altura_screen / 2 - altura / 2  # meio da primeira tela
         self.master.geometry('%dx%d+%d+%d' % (largura, altura, posx, posy))  # dimensões + posição inicial
 
     def create_widgets(self):
@@ -42,7 +42,7 @@ class Application(tk.Frame):
         style.configure('BG.TCheckbutton', selectcolor='#818181', foreground="black", background="gray"
                         , bd=2, width=9, anchor='w')
         style.configure('Combo.TCombobox', foreground="black", background="gray", bordercolor='black')
-        self.label_titulo_1 = ttk.Label(self, text='Formata texto para Nota', style='Title.TLabel')
+        self.label_titulo_1 = ttk.Label(self, text='Formata texto para nota', style='Title.TLabel')
         self.button_1 = tk.Button(self, text='Gera nota formatada', width=55, bg='#31363b', fg='white',
                                   highlightbackground='black', command=self.formata_texto_nota)
         self.label2 = ttk.Label(self, text='Estilo:', style='BG.TLabel')
@@ -53,25 +53,26 @@ class Application(tk.Frame):
         self.label_color = ttk.Label(self, text='Cor:', style='BG.TLabel')
         self.combo_color = ttk.Combobox(self, values=['Normal', 'Azul', 'Verde','Vermelho' ], style='Combo.TCombobox',
                                         exportselection=0)
-        self.entry_texto_nota = tk.Entry(self)
+        #self.entry_texto_nota = tk.Entry(self, font='Arial 10')
+        self.texto_nota = tk.Text(self, width=65, height=5, bg='#125487', fg='orange', font='Arial 10')
         self.separator_texto = ttk.Separator(self, orient=tk.HORIZONTAL)
-        self.label_titulo_2 = ttk.Label(self, text='Inclui link (url) em Nota', style='Title.TLabel')
+        self.label_titulo_2 = ttk.Label(self, text='Inclui link (url) em nota', style='Title.TLabel')
         self.button_2 = tk.Button(self, text='Gera link para url', width=55, bg='#31363b', fg='white',
                                   highlightbackground='black', command=self.link_url)
         self.label3 = ttk.Label(self, text='Link:', style='BG.TLabel')
-        self.entry_link = tk.Entry(self)
+        self.entry_link = tk.Entry(self, bg='#125487', fg='orange', width=65, font='Arial 10')
         self.separator_link = ttk.Separator(self, orient=tk.HORIZONTAL)
-        self.label_titulo_3 = ttk.Label(self, text='Inclui link para outro processo', style='Title.TLabel')
+        self.label_titulo_3 = ttk.Label(self, text='Inclui link para outro processo em nota', style='Title.TLabel')
         self.button_3 = tk.Button(self, text='Gera link para outro processo', width=55, bg='#31363b', fg='white',
                                   highlightbackground='black', command=self.link_processo)
         self.label4 = ttk.Label(self, text='Processo:', style='BG.TLabel')
-        self.entry_processo = tk.Entry(self)
+        self.entry_processo = tk.Entry(self, bg='#125487', fg='orange', width=65, font='Arial 10')
         self.separator_processo = ttk.Separator(self, orient=tk.HORIZONTAL)
         self.label_titulo_4 = ttk.Label(self, text='Traspõe relação de processos copiados na memória', style='Title.TLabel')
         self.button_4 = tk.Button(self, text='Gera relação trasposta', width=55, bg='#31363b',
                                   fg='white', highlightbackground='black', command=self.transpoe_clipboard)
         self.separator_transpor = ttk.Separator(self, orient=tk.HORIZONTAL)
-        self.texto_saida = tk.Text(self.master, width=65, height=17)
+        self.texto_saida = tk.Text(self.master, width=65, height=10,  bg='#125487', fg='orange', font='Courier 9')
         self.texto_saida.bind('<Escape>', self.exit)  # com um Esc encera o programa
 
 
@@ -88,28 +89,24 @@ class Application(tk.Frame):
         self.label_color.grid(row=2, column=1, sticky='e')
         self.combo_color.grid(row=2, column=2)
         self.combo_color.set('Normal')
-        self.entry_texto_nota.grid(row=3, columnspan=6)
-        self.entry_texto_nota.insert(0, 'Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM')
-        self.entry_texto_nota['bg'] = '#125487'
-        self.entry_texto_nota['fg'] = 'orange'
-        self.entry_texto_nota['width'] = 57
+        # self.entry_texto_nota.grid(row=3, columnspan=6)
+        # self.entry_texto_nota.insert(0, 'Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM')
+        # self.entry_texto_nota['bg'] = '#125487'
+        # self.entry_texto_nota['fg'] = 'orange'
+        # self.entry_texto_nota['width'] = 62
+        self.texto_nota.grid(row=3, columnspan=6)
+        self.texto_nota.insert(tk.INSERT,'Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM')
         self.button_1.grid(row=4, column=0, columnspan=6)
         self.separator_texto.grid(row=5, columnspan=6, padx=10, pady=5, sticky=tk.EW)
         self.label_titulo_2.grid(row=6, column=0, columnspan=6)
         self.label3.grid(row=7, column=0, sticky='w')
         self.entry_link.grid(row=8, columnspan=6)
-        self.entry_link['bg'] = '#125487'
-        self.entry_link['fg'] = 'orange'
-        self.entry_link['width'] = 57
         self.entry_link.insert(0, 'http://receita.economia.gov.br/')
         self.button_2.grid(row=9, column=0, columnspan=6)
         self.separator_link.grid(row=10, columnspan=6, padx=10, pady=5, sticky=tk.EW)
         self.label_titulo_3.grid(row=11, columnspan=6)
         self.label4.grid(row=12, column=0, sticky='w')
         self.entry_processo.grid(row=13, columnspan=6)
-        self.entry_processo['bg'] = '#125487'
-        self.entry_processo['fg'] = 'orange'
-        self.entry_processo['width'] = 57
         self.button_3.grid(row=14, column=0, columnspan=6)
         self.separator_processo.grid(row=15, columnspan=6, padx=10, pady=5, sticky=tk.EW)
         self.label_titulo_4.grid(row=16, columnspan=6)
@@ -152,7 +149,7 @@ class Application(tk.Frame):
             fonte_cor = f'<FONT COLOR="{cor}">'
             sufixo += '</FONT>'
 
-        texto = self.entry_texto_nota.get()
+        texto = self.texto_nota.get(1.0, tk.END)
         if len(texto) == 0:
             print('Informe o texto da nota')
             self.texto_saida.insert(tk.INSERT, 'Informe o texto da nota\n\n')
