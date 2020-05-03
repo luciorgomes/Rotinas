@@ -6,23 +6,16 @@ import os
 import sys
 import zipfile
 import datetime
-from tkinter import filedialog
-from tkinter import *
+import seleciona_diretório as sd
+import janela_texto as jt
 
 
 def backupToZip():
-    # Faz backup do conteúdo do 'folder' em um arquivo Zip.
+    '''Faz backup do conteúdo do 'folder' em um arquivo Zip.'''
 
     # abre dialogbox para seleção do folder
-#    folder = diropenbox("Selecione a pasta para ser feito o backup")
-    root = Tk()
-    root.option_add('*foreground','#125578') # altera a cor da fonte
-    root.withdraw() # esconde a 'root' criada por ser desnecessária
-    folder = filedialog.askdirectory(title="Selecione a pasta para ser feito o backup")
-    try:
-        os.chdir(folder)  # altera o diretório de trabalho para a pasta 'folder'
-    except TypeError:
-        print("Cancelado.")
+    folder = sd.seleciona_diretorio(titulo='Selecione a pasta a ser feito o backup')
+    if folder is None:
         sys.exit()
 
     # Determina o nome de arquivo que esse código deverá usar conforme os arquivos já existentes
@@ -35,14 +28,19 @@ def backupToZip():
         number = number + 1
 
     # Cria o arquivo Zip
-    print("Creating %s..." % zipFilename)
+    texto_final = ''
+    nome_arquivo = "Creating %s..." % zipFilename
+    print(nome_arquivo)
+    texto_final = nome_arquivo
     backupZip = zipfile.ZipFile(zipFilename, 'w')
 
     # Percorre toda árvore de diretório e compacta os arquivos de cada pasta.
+
     for foldername, subfolders, filenames in os.walk(folder):
         if 'venv' in foldername or '__pycache__' in foldername:  # evita pastas de ambiente do python
             continue
-        print('Adding files in %s...' % foldername)
+        loop_text = 'Adding files in %s...' % foldername
+        print(loop_text)
         # Acrescenta a pasta atual ao arquivo zip.
         backupZip.write(foldername)
 
@@ -52,9 +50,12 @@ def backupToZip():
             if filename.startswith(newBase) and filename.endswith('.zip'):
                 continue  # não faz backup dos arquivos de backup anteriores.
             backupZip.write(os.path.join(foldername, filename))
+        texto_final += '\n' + loop_text
     backupZip.close()
-
     print('Done.')
+    #jt.janela_texto('backupToZip', 'Saída:', texto_final)
+
+
 
 if __name__ == '__main__': # executa se chamado diretamente
     backupToZip()

@@ -15,7 +15,7 @@ import google_rfb
 import combinePdfsGui
 import converterCsvParaExcelGui
 import converterExcelparaCsvGui
-import buscaArquivosGrandes
+import busca_arquivos_grandes
 import mcbGui
 import transposeCells
 import formata_notas_eprocesso
@@ -70,7 +70,7 @@ def run_choices():
         converterExcelparaCsvGui.converterExcelParaCsv()
     elif choice == 'Busca arquivos grandes':
         print('Executando buscaArquivosGrandes')
-        buscaArquivosGrandes.buscaArquivosGrandes()
+        busca_arquivos_grandes.buscaArquivosGrandes()
     elif choice == 'Salva e recupera texto do clipboard':
         print('Executando mcbGui')
         mcbGui.mcbGui()

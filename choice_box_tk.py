@@ -3,7 +3,7 @@
 
 
 from tkinter import *
-import backupToZipGui
+import backup_to_zip
 import copiaSeletivaGui
 import regex_file
 import regex_clipboard
@@ -15,10 +15,10 @@ import google_rfb
 import combinePdfsGui
 import converterCsvParaExcelGui
 import converterExcelparaCsvGui
-import buscaArquivosGrandes
-import mcbGui
+import busca_arquivos_grandes
+import salva_clipboard
 import transposeCells
-import formata_notas_eprocesso
+import eProcesso
 
 
 class App:
@@ -29,7 +29,7 @@ class App:
                         'Converte pdf para texto', 'Converte docx para texto', 'Transpor clipboard',
                         'Abre endereço no Maps', 'Google RFB','Concaternar pdf', 'Converte csv para xslx',
                         'Converte xlsx para csv', 'Busca arquivos grandes', 'Salva e recupera texto do clipboard',
-                        'Transpõe xlsx (linhas x colunas)', 'Formata Nota para e-Processo']
+                        'Transpõe xlsx (linhas x colunas)', 'e-Processo']
         self.choices = sorted(self.choices)
         self.define_raiz()
         self.create_widgets()
@@ -38,6 +38,7 @@ class App:
     def define_raiz(self):
         '''Define caracterísicas da janela'''
         self.root.title('Rotinas')
+        self.root.iconphoto(False, PhotoImage(file='/mnt/HD Externo/python/PycharmProjects/Rotinas/Python-icon.png'))
         # dimensões da janela
         largura = 300
         altura = 500
@@ -55,8 +56,8 @@ class App:
         if choice is None:
             print('Tchau!')
         elif choice == 'Backup to Zip':
-            print('Executando backupTpZipGui')
-            backupToZipGui.backupToZip()
+            print('Executando backup_tp_zip')
+            backup_to_zip.backup_to_zip()
         elif choice == 'Cópia por extensão':
             print('Executando copiaSeletivaGui')
             copiaSeletivaGui.copyByExtension()
@@ -92,16 +93,16 @@ class App:
             converterExcelparaCsvGui.converterExcelParaCsv()
         elif choice == 'Busca arquivos grandes':
             print('Executando buscaArquivosGrandes')
-            buscaArquivosGrandes.buscaArquivosGrandes()
+            busca_arquivos_grandes.busca_arquivos_grandes()
         elif choice == 'Salva e recupera texto do clipboard':
-            print('Executando mcbGui')
-            mcbGui.mcbGui()
+            print('Executando salva_clipboard')
+            salva_clipboard.salva_clipboard()
         elif choice == 'Transpõe xlsx (linhas x colunas)':
             print('Executando transposeCells')
             transposeCells.transposeCells()
-        elif choice == 'Formata Nota para e-Processo':
-            print('Executando formata_notas_eprocesso')
-            formata_notas_eprocesso.main()
+        elif choice == 'e-Processo':
+            print('Executando e_processo')
+            eProcesso.e_processo()
 
     def choice_select(self, event):
         '''Recupera o item selecionado no Listbox e chama o método chama_rotina()'''
@@ -112,11 +113,20 @@ class App:
 
     def create_widgets(self):
         '''Cria o Listbox e inclui os itens da lista self.choices'''
-        self.list_box = Listbox(self.root, width=500, height=500)
+        self.list_box = Listbox(self.root, width=500, height=500, bg='#31363b', fg='#eff0f1',
+                                highlightbackground='#125487',selectbackground='#125487',selectforeground='orange')
         self.list_box.pack()
         for item in self.choices:
             self.list_box.insert(END, item)
+        self.list_box.select_set(0)
+        self.list_box.focus() # define o foco para o listbox
         self.list_box.bind("<Double-Button>", self.choice_select) # com um duplo clique chama a rotina correspondente.
+        self.list_box.bind("<Return>", self.choice_select)  # com um Enter chama a rotina correspondente.
+        self.list_box.bind('<Escape>', self.exit) # com um Esc encera o programa
 
-app = App()
+    def exit(self,event=None):
+        self.root.destroy()
+
+if __name__ == '__main__': # executa se chamado diretamente
+    app = App()
 
