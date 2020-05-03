@@ -84,6 +84,7 @@ class Application(tk.Frame):
         self.label_titulo_1.grid(row=0, column=0, columnspan=6)
         self.label2.grid(row=1, column=0)
         self.check_negrito.grid(row=1, column=1)
+        self.valor_negrito.set('1')
         self.check_italico.grid(row=1, column=2)
         self.check_sublinhado.grid(row=1, column=3)
         self.label_color.grid(row=2, column=1, sticky='e')

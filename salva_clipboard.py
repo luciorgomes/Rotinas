@@ -6,6 +6,7 @@ import shelve
 import sys
 import easygui as eg
 import tkinter as tk
+import os
 
 
 class Application(tk.Frame):
@@ -13,7 +14,7 @@ class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
-        self.icon = tk.PhotoImage(file='./image/Folder-icon.png')
+        #self.icon = tk.PhotoImage(file='Folder-icon.png')
         self.mcb_shelve = shelve.open('mcb') # abre (ou cria se não houver) o arquivo binário 'mcb'.
         self.lista_mcb = list(self.mcb_shelve.keys())  # gera lista com o conteúdo atual
         self.shelve_close()
