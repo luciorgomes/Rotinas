@@ -73,6 +73,12 @@ class Application(tk.Frame):
                                   fg='white', highlightbackground='black', command=self.transpoe_clipboard)
         self.separator_transpor = ttk.Separator(self, orient=tk.HORIZONTAL)
         self.texto_saida = tk.Text(self.master, width=65, height=10,  bg='#125487', fg='orange', font='Courier 9')
+        self.texto_nota.bind('<Return>', self.formata_texto_nota)
+        self.texto_nota.bind('<Escape>', self.exit)  # com um Esc encera o programa
+        self.entry_link.bind('<Return>', self.link_url)
+        self.entry_link.bind('<Escape>', self.exit)  # com um Esc encera o programa
+        self.entry_processo.bind('<Return>', self.link_processo)
+        self.entry_processo.bind('<Escape>', self.exit)  # com um Esc encera o programa
         self.texto_saida.bind('<Escape>', self.exit)  # com um Esc encera o programa
 
 
@@ -119,7 +125,7 @@ class Application(tk.Frame):
     def exit(self, event=None):
         self.master.destroy()
 
-    def formata_texto_nota(self):
+    def formata_texto_nota(self, event=None):
         '''Aplica formatação a Nota de processo'''
         prefixo = ''
         sufixo = ''
@@ -163,7 +169,7 @@ class Application(tk.Frame):
             self.texto_saida.see(tk.END)
 
 
-    def link_url(self):
+    def link_url(self, event=None):
         '''Gera link (url) para Nota de processo'''
         link = self.entry_link.get()
         if len(link) == 0:
@@ -177,7 +183,7 @@ class Application(tk.Frame):
             self.texto_saida.insert(tk.INSERT, tag_link + '\n\nTexto do link copiado para a memória (cole com Ctrl+v)\n\n')
             self.texto_saida.see(tk.END)
 
-    def link_processo(self):
+    def link_processo(self, event=None):
         '''Gera link para outro processo para ser inserido em Nota'''
         processo = self.entry_processo.get()
         if len(processo) == 0:
