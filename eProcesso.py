@@ -1,6 +1,7 @@
 #! /usr/bin/python3
 # eProcesso.py - Funções relacionadas ao e-Processo.
 
+
 import pyperclip  # manipulação de arquivos binários, clipboard e leitura de linha de comando
 import tkinter as tk
 import tkinter.ttk as ttk
@@ -79,8 +80,6 @@ class Application(tk.Frame):
         self.entry_processo.bind('<Escape>', self.exit)  # com um Esc encera o programa
         self.texto_saida.bind('<Escape>', self.exit)  # com um Esc encera o programa
 
-
-
     def layout(self):
         '''define a posição dos componentes da janela'''
         self.define_raiz()
@@ -94,11 +93,6 @@ class Application(tk.Frame):
         self.label_color.grid(row=2, column=1, sticky='e')
         self.combo_color.grid(row=2, column=2)
         self.combo_color.set('Normal')
-        # self.entry_texto_nota.grid(row=3, columnspan=6)
-        # self.entry_texto_nota.insert(0, 'Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM')
-        # self.entry_texto_nota['bg'] = '#125487'
-        # self.entry_texto_nota['fg'] = 'orange'
-        # self.entry_texto_nota['width'] = 62
         self.texto_nota.grid(row=3, columnspan=6)
         self.texto_nota.insert(tk.INSERT,'Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM.')
         self.button_1.grid(row=4, column=0, columnspan=6)
@@ -167,7 +161,6 @@ class Application(tk.Frame):
             self.texto_saida.insert(tk.INSERT, saida + '\n\nNota copiada para a memória (cole com Ctrl+v)\n\n')
             self.texto_saida.see(tk.END)
 
-
     def link_url(self, event=None):
         '''Gera link (url) para Nota de processo'''
         link = self.entry_link.get()
@@ -179,7 +172,8 @@ class Application(tk.Frame):
             tag_link = f'<a href="{link}" target = "_blank" title = "{link}">{link}</a>'
             pyperclip.copy(tag_link)
             print('Texto do link copiado para a memória (cole com Ctrl+v)')
-            self.texto_saida.insert(tk.INSERT, tag_link + '\n\nTexto do link copiado para a memória (cole com Ctrl+v)\n\n')
+            self.texto_saida.insert(tk.INSERT, tag_link +
+                                    '\n\nTexto do link copiado para a memória (cole com Ctrl+v)\n\n')
             self.texto_saida.see(tk.END)
 
     def link_processo(self, event=None):
@@ -190,12 +184,13 @@ class Application(tk.Frame):
             self.texto_saida.insert(tk.INSERT, 'Informe o processo\n\n')
             self.texto_saida.see(tk.END)
         else:
-            proc_filtered = ''.join(i for i in processo if i.isdigit())  # desconsidera tudo o que não for texto em processo
+            proc_filtered = ''.join(i for i in processo if i.isdigit())  # desconsidera tudo o que não for texto
             processo_link = f'<a href="https://eprocesso.suiterfb.receita.fazenda/ControleVisualizacaoProcesso.asp?psAcao=exibir&psNumeroProcesso=\
                 {proc_filtered} " target = "_blank" title = "{proc_filtered} ">{proc_filtered} </a>'
             pyperclip.copy(processo_link)
             print('Texto do link copiado para a memória (cole com Ctrl+v)')
-            self.texto_saida.insert(tk.INSERT, processo_link + '\n\nTexto do link copiado para a memória (cole com Ctrl+v)\n\n')
+            self.texto_saida.insert(tk.INSERT, processo_link +
+                                    '\n\nTexto do link copiado para a memória (cole com Ctrl+v)\n\n')
             self.texto_saida.see(tk.END)
 
     def transpoe_clipboard(self):
@@ -205,14 +200,17 @@ class Application(tk.Frame):
         transposed = ','.join(mem)
         pyperclip.copy(transposed)
         print('Relação transposta copiada para a memória (cole com Ctrl+v)')
-        self.texto_saida.insert(tk.INSERT, transposed + '\n\nRelação transposta copiada para a memória (cole com Ctrl+v)\n\n')
+        self.texto_saida.insert(tk.INSERT, transposed +
+                                '\n\nRelação transposta copiada para a memória (cole com Ctrl+v)\n\n')
         self.texto_saida.see(tk.END)
+
 
 def e_processo():
     '''busca arquivos de valor maior ou igual a um valor dado em um diretório'''
     root = tk.Tk()
     app = Application(master=root)
     app.mainloop()
+
 
 if __name__ == '__main__':  # executa se chamado diretamente
     e_processo()
