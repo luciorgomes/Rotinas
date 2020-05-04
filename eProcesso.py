@@ -68,16 +68,14 @@ class Application(tk.Frame):
         self.label4 = ttk.Label(self, text='Processo:', style='BG.TLabel')
         self.entry_processo = tk.Entry(self, bg='#125487', fg='orange', width=65, font='Arial 10')
         self.separator_processo = ttk.Separator(self, orient=tk.HORIZONTAL)
-        self.label_titulo_4 = ttk.Label(self, text='Traspõe relação de processos copiados na memória', style='Title.TLabel')
+        self.label_titulo_4 = ttk.Label(self, text='Traspõe relação de processos copiados na memória',
+                                        style='Title.TLabel')
         self.button_4 = tk.Button(self, text='Gera relação trasposta', width=55, bg='#31363b',
                                   fg='white', highlightbackground='black', command=self.transpoe_clipboard)
         self.separator_transpor = ttk.Separator(self, orient=tk.HORIZONTAL)
         self.texto_saida = tk.Text(self.master, width=65, height=10,  bg='#125487', fg='orange', font='Courier 9')
-        self.texto_nota.bind('<Return>', self.formata_texto_nota)
         self.texto_nota.bind('<Escape>', self.exit)  # com um Esc encera o programa
-        self.entry_link.bind('<Return>', self.link_url)
         self.entry_link.bind('<Escape>', self.exit)  # com um Esc encera o programa
-        self.entry_processo.bind('<Return>', self.link_processo)
         self.entry_processo.bind('<Escape>', self.exit)  # com um Esc encera o programa
         self.texto_saida.bind('<Escape>', self.exit)  # com um Esc encera o programa
 
@@ -102,7 +100,7 @@ class Application(tk.Frame):
         # self.entry_texto_nota['fg'] = 'orange'
         # self.entry_texto_nota['width'] = 62
         self.texto_nota.grid(row=3, columnspan=6)
-        self.texto_nota.insert(tk.INSERT,'Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM')
+        self.texto_nota.insert(tk.INSERT,'Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM.')
         self.button_1.grid(row=4, column=0, columnspan=6)
         self.separator_texto.grid(row=5, columnspan=6, padx=10, pady=5, sticky=tk.EW)
         self.label_titulo_2.grid(row=6, column=0, columnspan=6)
@@ -162,6 +160,7 @@ class Application(tk.Frame):
             self.texto_saida.insert(tk.INSERT, 'Informe o texto da nota\n\n')
             self.texto_saida.see(tk.END)
         else:
+            texto = texto[:-1] # remove a nova linha do final do texto
             saida = prefixo + fonte_cor + texto + sufixo
             pyperclip.copy(saida)  # manda para o clipboard
             print('Nota copiada para a memória (cole com Ctrl+v)')
