@@ -38,7 +38,7 @@ class App:
     def define_raiz(self):
         '''Define caracterísicas da janela'''
         self.root.title('Rotinas')
-        self.root.iconphoto(False, PhotoImage(file='/mnt/HD Externo/python/PycharmProjects/Rotinas/Python-icon.png'))
+        self.root.iconphoto(False, PhotoImage(file='Python-icon.png'))
         # dimensões da janela
         largura = 300
         altura = 500

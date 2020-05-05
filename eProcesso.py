@@ -41,11 +41,11 @@ class Application(tk.Frame):
         style.configure('BG.TLabel', foreground="black", background="gray", padding=4)
         style.configure('BW.TButton', foreground='#bfbfbf', background='#31363b', highlightbackground='black', width=50)
         style.configure('BG.TCheckbutton', selectcolor='#818181', foreground="black", background="gray"
-                        , bd=2, width=9, anchor='w')
+                        , bd=2, width=11, anchor='w')
         style.configure('Combo.TCombobox', foreground="black", background="gray", bordercolor='black')
         self.label_titulo_1 = ttk.Label(self, text='Formata texto para nota', style='Title.TLabel')
-        self.button_1 = tk.Button(self, text='Gera nota formatada', width=55, bg='#31363b', fg='white',
-                                  highlightbackground='black', command=self.formata_texto_nota)
+        self.button_1 = tk.Button(self, text='Gera nota formatada', width=63, bg='#31363b', fg='white',
+                                  font='Helvetica 10', highlightbackground='black', command=self.formata_texto_nota)
         self.label2 = ttk.Label(self, text='Estilo:', style='BG.TLabel')
         self.check_negrito = ttk.Checkbutton(self, text='Negrito', variable=self.valor_negrito, style='BG.TCheckbutton')
         self.check_italico = ttk.Checkbutton(self, text='Itálico', variable=self.valor_italico, style='BG.TCheckbutton')
@@ -58,21 +58,21 @@ class Application(tk.Frame):
         self.texto_nota = tk.Text(self, width=65, height=5, bg='#125487', fg='orange', font='Arial 10')
         self.separator_texto = ttk.Separator(self, orient=tk.HORIZONTAL)
         self.label_titulo_2 = ttk.Label(self, text='Inclui link (url) em nota', style='Title.TLabel')
-        self.button_2 = tk.Button(self, text='Gera link para url', width=55, bg='#31363b', fg='white',
-                                  highlightbackground='black', command=self.link_url)
+        self.button_2 = tk.Button(self, text='Gera link para url', width=63, bg='#31363b', fg='white',
+                                  font='Helvetica 10', highlightbackground='black', command=self.link_url)
         self.label3 = ttk.Label(self, text='Link:', style='BG.TLabel')
         self.entry_link = tk.Entry(self, bg='#125487', fg='orange', width=65, font='Arial 10')
         self.separator_link = ttk.Separator(self, orient=tk.HORIZONTAL)
         self.label_titulo_3 = ttk.Label(self, text='Inclui link para outro processo em nota', style='Title.TLabel')
-        self.button_3 = tk.Button(self, text='Gera link para outro processo', width=55, bg='#31363b', fg='white',
-                                  highlightbackground='black', command=self.link_processo)
+        self.button_3 = tk.Button(self, text='Gera link para outro processo', width=63, bg='#31363b', fg='white',
+                                  font='Helvetica 10', highlightbackground='black', command=self.link_processo)
         self.label4 = ttk.Label(self, text='Processo:', style='BG.TLabel')
         self.entry_processo = tk.Entry(self, bg='#125487', fg='orange', width=65, font='Arial 10')
         self.separator_processo = ttk.Separator(self, orient=tk.HORIZONTAL)
-        self.label_titulo_4 = ttk.Label(self, text='Traspõe relação de processos copiados na memória',
+        self.label_titulo_4 = ttk.Label(self, text='Transpõe relação de processos copiados na memória',
                                         style='Title.TLabel')
-        self.button_4 = tk.Button(self, text='Gera relação trasposta', width=55, bg='#31363b',
-                                  fg='white', highlightbackground='black', command=self.transpoe_clipboard)
+        self.button_4 = tk.Button(self, text='Gera relação transposta', width=63, bg='#31363b',
+                                  font='Helvetica 10', fg='white', highlightbackground='black', command=self.transpoe_clipboard)
         self.separator_transpor = ttk.Separator(self, orient=tk.HORIZONTAL)
         self.texto_saida = tk.Text(self.master, width=65, height=10,  bg='#125487', fg='orange', font='Courier 9')
         self.texto_nota.bind('<Escape>', self.exit)  # com um Esc encera o programa
@@ -85,7 +85,7 @@ class Application(tk.Frame):
         self.define_raiz()
         self.configure(bg='gray')
         self.label_titulo_1.grid(row=0, column=0, columnspan=6)
-        self.label2.grid(row=1, column=0)
+        self.label2.grid(row=1, column=0, sticky='w')
         self.check_negrito.grid(row=1, column=1)
         self.valor_negrito.set('1')
         self.check_italico.grid(row=1, column=2)
