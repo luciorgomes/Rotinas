@@ -41,6 +41,8 @@ class Application(tk.Frame):
         self.texto_saida.insert(tk.INSERT,'Informe o NI e tecle <Enter>.\n\n')
         self.entry_cpf.bind('<Return>', self.calcula_cpf)
         self.entry_cnpj.bind('<Return>', self.calcula_cnpj)
+        self.entry_cpf.bind('<KP_Enter>', self.calcula_cpf) # enter do teclado numérico
+        self.entry_cnpj.bind('<KP_Enter>', self.calcula_cnpj)
         self.entry_cpf.focus()
 
     def layout(self):
