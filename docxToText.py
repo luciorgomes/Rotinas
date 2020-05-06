@@ -15,5 +15,10 @@ def docx_to_text():
         for para in doc.paragraphs:
             text.write(para.text + '\n')
 
+
+def doc_to_text():
+    pass
+
+
 if __name__ == '__main__': # executa se chamado diretamente
     doc_to_text()

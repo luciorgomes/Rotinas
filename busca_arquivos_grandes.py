@@ -93,7 +93,7 @@ class Application(tk.Frame):
             erro_folder = 's'
 
         self.size = self.entry_size.get()
-        if self.size.isdecimal() == False:
+        if not self.size.isdecimal():
             print("Tamanho inválido!")
             erro_tamanho = 's'
 

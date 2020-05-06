@@ -55,9 +55,9 @@ class Application(tk.Frame):
 
     def calcula_cpf(self, event=None):
         entrada_cpf = self.entry_cpf.get()
-        if len(entrada_cpf) == 11 and entrada_cpf.isdecimal() == True:
+        if len(entrada_cpf) == 11 and entrada_cpf.isdecimal():
             cpf_calc = entrada_cpf[:9]
-        elif len(entrada_cpf) == 9 and entrada_cpf.isdecimal() == True:
+        elif len(entrada_cpf) == 9 and entrada_cpf.isdecimal():
             cpf_calc = entrada_cpf
         else:
             cpf_calc = None
@@ -65,7 +65,7 @@ class Application(tk.Frame):
                                     f'Informe a entrada com 9 ou 11 dígitos\n\n')
             self.texto_saida.see(tk.END)
 
-        if cpf_calc != None:
+        if cpf_calc is not None:
 
             multiplicador = 10
 
@@ -102,9 +102,9 @@ class Application(tk.Frame):
 
     def calcula_cnpj(self, event=None):
         entrada_cnpj = self.entry_cnpj.get()
-        if len(entrada_cnpj) == 14 and entrada_cnpj.isdecimal() == True:
+        if len(entrada_cnpj) == 14 and entrada_cnpj.isdecimal():
             cnpj_calc = entrada_cnpj[:12]
-        elif len(entrada_cnpj) == 12 and entrada_cnpj.isdecimal() == True:
+        elif len(entrada_cnpj) == 12 and entrada_cnpj.isdecimal():
             cnpj_calc = entrada_cnpj
         else:
             cnpj_calc = None
@@ -112,7 +112,7 @@ class Application(tk.Frame):
                                     f'Informe a entrada com 14 ou 12 dígitos\n\n')
             self.texto_saida.see(tk.END)
 
-        if cnpj_calc != None:
+        if cnpj_calc is not None:
 
             multiplicador = 5
             soma1 = 0
