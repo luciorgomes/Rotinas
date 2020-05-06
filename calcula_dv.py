@@ -38,6 +38,7 @@ class Application(tk.Frame):
         self.label_cnpj= tk.Label(self, text='Cnpj:', bg='gray', fg='black')
         self.entry_cnpj = tk.Entry(self, bg='#125487', fg='orange', width=18)
         self.texto_saida = tk.Text(self, width=32, height=10,  bg='#125487', fg='orange', font='Courier 9')
+        self.texto_saida.insert(tk.INSERT,'Informe o NI e tecle <Enter>.\n\n')
         self.entry_cpf.bind('<Return>', self.calcula_cpf)
         self.entry_cnpj.bind('<Return>', self.calcula_cnpj)
         self.entry_cpf.focus()
@@ -61,7 +62,7 @@ class Application(tk.Frame):
         else:
             cpf_calc = None
             self.texto_saida.insert(tk.INSERT,
-                                    f'Informe entrada com 9 ou 11 dígitos\n\n')
+                                    f'Informe a entrada com 9 ou 11 dígitos\n\n')
             self.texto_saida.see(tk.END)
 
         if cpf_calc != None:
@@ -108,7 +109,7 @@ class Application(tk.Frame):
         else:
             cnpj_calc = None
             self.texto_saida.insert(tk.INSERT,
-                                    f'Informe entrada com 14 ou 12 dígitos\n\n')
+                                    f'Informe a entrada com 14 ou 12 dígitos\n\n')
             self.texto_saida.see(tk.END)
 
         if cnpj_calc != None:

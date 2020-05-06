@@ -19,6 +19,7 @@ import busca_arquivos_grandes
 import salva_clipboard
 import transposeCells
 import eProcesso
+import calcula_dv
 
 
 class App:
@@ -29,7 +30,7 @@ class App:
                         'Converte pdf para texto', 'Converte docx para texto', 'Transpor clipboard',
                         'Abre endereço no Maps', 'Google RFB','Concaternar pdf', 'Converte csv para xslx',
                         'Converte xlsx para csv', 'Busca arquivos grandes', 'Salva e recupera texto do clipboard',
-                        'Transpõe xlsx (linhas x colunas)', 'e-Processo']
+                        'Transpõe xlsx (linhas x colunas)', 'e-Processo', 'Cálculo de Dígitos Verificadores']
         self.choices = sorted(self.choices)
         self.define_raiz()
         self.create_widgets()
@@ -103,6 +104,9 @@ class App:
         elif choice == 'e-Processo':
             print('Executando e_processo')
             eProcesso.e_processo()
+        elif choice == 'Cálculo de Dígitos Verificadores':
+            print('Executando calcula_dv')
+            calcula_dv.calcula_dv()
 
     def choice_select(self, event):
         '''Recupera o item selecionado no Listbox e chama o método chama_rotina()'''
