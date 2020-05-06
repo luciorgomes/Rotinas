@@ -2,9 +2,7 @@
 # mapIt - Inicia um mapa no navegador usando um endereço
 # da linha de comendo ou do clipboard.
 
-import webbrowser
 import tkinter as tk
-import tkinter.ttk as ttk
 
 class Application(tk.Frame):
     '''instancia a janela de parâmetros da busca de arquivos grandes'''
