@@ -118,14 +118,13 @@ class App:
     def create_widgets(self):
         '''Cria o Listbox e inclui os itens da lista self.choices'''
         self.list_box = Listbox(self.root, width=500, height=500, bg='#31363b', fg='#eff0f1',
-                                highlightbackground='#125487',selectbackground='#125487',selectforeground='orange',
-                                cursor='dot')
+                                highlightbackground='#125487',selectbackground='#125487',selectforeground='orange')
         self.list_box.pack()
         for item in self.choices:
             self.list_box.insert(END, item)
         self.list_box.select_set(0)
         self.list_box.focus() # define o foco para o listbox
-        self.list_box.bind("<Button>", self.choice_select) # com um duplo clique chama a rotina correspondente.
+        # self.list_box.bind("<Button>", self.choice_select) # com um duplo clique chama a rotina correspondente.
         self.list_box.bind("<Double-Button>", self.choice_select) # com um duplo clique chama a rotina correspondente.
         self.list_box.bind("<Return>", self.choice_select)  # com um Enter chama a rotina correspondente.
         self.list_box.bind('<Escape>', self.exit) # com um Esc encera o programa
