@@ -80,7 +80,7 @@ class Application(tk.Frame):
         self.saída['bg'] = '#33425c'
         self.saída['fg'] = 'orange'
         self.saída['font'] = 'Mono 8'
-        self.separator.pack()
+        self.separator.pack(fill='x')
         self.saída.pack()
         self.button_dir.focus()
 
