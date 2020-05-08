@@ -5,7 +5,6 @@
 import pyperclip  # manipulação de arquivos binários, clipboard e leitura de linha de comando
 import tkinter as tk
 import tkinter.ttk as ttk
-import webbrowser
 
 
 class Application(tk.Frame):
@@ -26,7 +25,7 @@ class Application(tk.Frame):
         self.master.configure(bg='gray')
         # dimensões da janela
         largura = 510
-        altura = 800
+        altura = 680
         # resolução da tela
         largura_screen = self.master.winfo_screenwidth()
         altura_screen = self.master.winfo_screenheight()
@@ -44,11 +43,9 @@ class Application(tk.Frame):
         style.configure('BG.TCheckbutton', selectcolor='#818181', foreground="black", background="gray"
                         , bd=2, width=11, anchor='w')
         style.configure('Combo.TCombobox', foreground="black", background="gray", bordercolor='black')
-        style_button = {'width': 56, 'bg': '#31363b', 'fg': 'white', 'font': 'Helvetica 10', 'highlightbackground': 'black'}
-
         self.label_titulo_1 = ttk.Label(self, text='Formata texto para nota', style='Title.TLabel')
-        self.button_1 = tk.Button(self,  style_button, text='Gera nota formatada', command=self.formata_texto_nota,)
-
+        self.button_1 = tk.Button(self, text='Gera nota formatada', width=63, bg='#31363b', fg='white',
+                                  font='Helvetica 10', highlightbackground='black', command=self.formata_texto_nota)
         self.label2 = ttk.Label(self, text='Estilo:', style='BG.TLabel')
         self.check_negrito = ttk.Checkbutton(self, text='Negrito', variable=self.valor_negrito, style='BG.TCheckbutton')
         self.check_italico = ttk.Checkbutton(self, text='Itálico', variable=self.valor_italico, style='BG.TCheckbutton')
@@ -57,27 +54,26 @@ class Application(tk.Frame):
         self.label_color = ttk.Label(self, text='Cor:', style='BG.TLabel')
         self.combo_color = ttk.Combobox(self, values=['Normal', 'Azul', 'Verde','Vermelho' ], style='Combo.TCombobox',
                                         exportselection=0)
+        #self.entry_texto_nota = tk.Entry(self, font='Arial 10')
         self.texto_nota = tk.Text(self, width=65, height=5, bg='#125487', fg='orange', font='Arial 10')
         self.separator_texto = ttk.Separator(self, orient=tk.HORIZONTAL)
         self.label_titulo_2 = ttk.Label(self, text='Inclui link (url) em nota', style='Title.TLabel')
-        self.button_2 = tk.Button(self, style_button, text='Gera link para url', command=self.link_url)
+        self.button_2 = tk.Button(self, text='Gera link para url', width=63, bg='#31363b', fg='white',
+                                  font='Helvetica 10', highlightbackground='black', command=self.link_url)
         self.label3 = ttk.Label(self, text='Link:', style='BG.TLabel')
         self.entry_link = tk.Entry(self, bg='#125487', fg='orange', width=65, font='Arial 10')
         self.separator_link = ttk.Separator(self, orient=tk.HORIZONTAL)
         self.label_titulo_3 = ttk.Label(self, text='Inclui link para outro processo em nota', style='Title.TLabel')
-        self.button_3 = tk.Button(self, style_button, text='Gera link para outro processo', command=self.link_processo)
+        self.button_3 = tk.Button(self, text='Gera link para outro processo', width=63, bg='#31363b', fg='white',
+                                  font='Helvetica 10', highlightbackground='black', command=self.link_processo)
         self.label4 = ttk.Label(self, text='Processo:', style='BG.TLabel')
         self.entry_processo = tk.Entry(self, bg='#125487', fg='orange', width=65, font='Arial 10')
         self.separator_processo = ttk.Separator(self, orient=tk.HORIZONTAL)
         self.label_titulo_4 = ttk.Label(self, text='Transpõe relação de processos copiados na memória',
                                         style='Title.TLabel')
-        self.button_4 = tk.Button(self, style_button, text='Gera relação transposta', command=self.transpoe_clipboard)
+        self.button_4 = tk.Button(self, text='Gera relação transposta', width=63, bg='#31363b',
+                                  font='Helvetica 10', fg='white', highlightbackground='black', command=self.transpoe_clipboard)
         self.separator_transpor = ttk.Separator(self, orient=tk.HORIZONTAL)
-        self.label_titulo_5 = ttk.Label(self, text='Abre funcionalidades',style='Title.TLabel')
-        self.button_5 = tk.Button(self, style_button, text='Abre caixa de trabalho',command=self.abre_caixa_trabalho)
-        self.button_6 = tk.Button(self, style_button, text='Abre gerencial de estoque', command=self.abre_gerencial_estoque)
-        self.button_7 = tk.Button(self, style_button, text='Abre consulta', command=self.abre_consulta)
-        self.separator_abre = ttk.Separator(self, orient=tk.HORIZONTAL)
         self.texto_saida = tk.Text(self.master, width=65, height=10,  bg='#125487', fg='orange', font='Courier 9')
         self.texto_nota.bind('<Escape>', self.exit)  # com um Esc encera o programa
         self.entry_link.bind('<Escape>', self.exit)  # com um Esc encera o programa
@@ -115,11 +111,6 @@ class Application(tk.Frame):
         self.label_titulo_4.grid(row=16, columnspan=6)
         self.button_4.grid(row=17, column=0, columnspan=6)
         self.separator_transpor.grid(row=18, columnspan=6, padx=10, pady=5, sticky=tk.EW)
-        self.label_titulo_5.grid(row=19, columnspan=6)
-        self.button_5.grid(row=20, column=0, columnspan=6)
-        self.button_6.grid(row=21, column=0, columnspan=6)
-        self.button_7.grid(row=22, column=0, columnspan=6)
-        self.separator_abre.grid(row=23, columnspan=6, padx=10, pady=5, sticky=tk.EW)
         self.texto_saida.pack()
         self.texto_saida.focus()
 
@@ -212,15 +203,6 @@ class Application(tk.Frame):
         self.texto_saida.insert(tk.INSERT, transposed +
                                 '\n\nRelação transposta copiada para a memória (cole com Ctrl+v)\n\n')
         self.texto_saida.see(tk.END)
-
-    def abre_caixa_trabalho(self, event=None):
-        webbrowser.open('https://eprocesso.suiterfb.receita.fazenda/ControleAcessarCaixaTrabalho.asp?psAcao=apresentarPagina&psLimpaEquipe=1')
-
-    def abre_gerencial_estoque(self, event=None):
-        webbrowser.open("https://eprocesso.suiterfb.receita.fazenda/relatorios/ControleManterVisao.asp?psAcao=exibir")
-
-    def abre_consulta(self, event=None):
-        webbrowser.open("https://eprocesso.suiterfb.receita.fazenda/eprocesso/index.html#/consultaProcesso")
 
 
 def e_processo():

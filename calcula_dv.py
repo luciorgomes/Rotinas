@@ -66,24 +66,18 @@ class Application(tk.Frame):
             self.texto_saida.see(tk.END)
 
         if cpf_calc is not None:
-
-            multiplicador = 10
-
             soma1 = 0
             for i in range(len(cpf_calc)):
-                soma1 += int(cpf_calc[i]) * multiplicador
-                multiplicador -= 1
+                soma1 += int(cpf_calc[i]) * (10 - i)
             mod_11_1 = soma1 % 11
             if mod_11_1 < 2:
                 dv1 = 0
             else:
                 dv1 = 11 - mod_11_1
             cpf_dv1 = cpf_calc + str(dv1)
-            multiplicador = 11
             soma2 = 0
             for j in range(len(cpf_dv1)):
-                soma2 += int(cpf_dv1[j]) * multiplicador
-                multiplicador -= 1
+                soma2 += int(cpf_dv1[j]) * (11 - j)
             mod_11_2 = soma2 % 11
             if mod_11_2 < 2:
                 dv2 = 0
@@ -113,14 +107,12 @@ class Application(tk.Frame):
             self.texto_saida.see(tk.END)
 
         if cnpj_calc is not None:
-
-            multiplicador = 5
             soma1 = 0
             for i in range(len(cnpj_calc)):
-                soma1 += int(cnpj_calc[i]) * multiplicador
-                multiplicador -= 1
-                if multiplicador < 2:
-                    multiplicador = 9
+                if i < 4:
+                    soma1 += int(cnpj_calc[i]) * (5 - i)
+                else:
+                    soma1 += int(cnpj_calc[i]) * (13 - i)
             mod_11_1 = soma1 % 11
             if mod_11_1 < 2:
                 dv1 = 0
