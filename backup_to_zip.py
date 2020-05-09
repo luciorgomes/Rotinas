@@ -23,7 +23,7 @@ class Application(tk.Frame):
 
         '''cria os componentes da janela'''
         tk.Label(self, text='Diretório:', bg= 'gray', fg='black').grid(row=0, column=0, sticky='e')
-        self.entry_dir = tk.Entry(self, bg='#125487', fg= 'orange', width= 45)
+        self.entry_dir = tk.Entry(self, bg='#33425c', fg= 'orange', width= 45)
         self.entry_dir.grid(row=0, column=1, columnspan=2)
         self.entry_dir.insert(0, os.getcwd())
         self.button_dir = tk.Button(self, text='>', image=self.icon, bg='#31363b', fg='white',
@@ -37,7 +37,7 @@ class Application(tk.Frame):
         self.separator = ttk.Separator(self.master, orient=tk.HORIZONTAL).pack(fill='x')
         self.saída = tk.Listbox(self.master, width= 140, height= 43, bg= '#33425c', fg='orange', font= 'Mono 8')
         self.saída.pack()
-
+        ##33425c
         self.define_raiz()
 
     def define_diretorio(self, event=None):

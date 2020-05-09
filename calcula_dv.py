@@ -17,24 +17,25 @@ class Application(tk.Frame):
 
     # create_widgets
         tk.Label(self, text='Cpf:', bg='gray', fg='black').grid(row=0, column=0, sticky='e', ipady=3)
-        self.entry_cpf = tk.Entry(self, bg='#125487', fg='orange', width=19)
+        self.entry_cpf = tk.Entry(self, bg='#33425c', fg='orange', width=19) #bg original '#125487'
         self.entry_cpf.grid(row=0, column=1, columnspan=2)
+
         tk.Label(self, text='Cnpj:', bg='gray', fg='black').grid(row=1, column=0, sticky='e', ipady=3)
-        self.entry_cnpj = tk.Entry(self, bg='#125487', fg='orange', width=19)
+        self.entry_cnpj = tk.Entry(self, bg='#33425c', fg='orange', width=19)
         self.entry_cnpj.grid(row=1, column=1, columnspan=2)
+
         tk.Label(self, text='Processo:', bg='gray', fg='black').grid(row=2, column=0, sticky='e', ipady=3)
-        self.entry_processo = tk.Entry(self, bg='#125487', fg='orange', width=19)
+        self.entry_processo = tk.Entry(self, bg='#33425c', fg='orange', width=19)
         self.entry_processo.grid(row=2, column=1, columnspan=2)
-        self.proc_0000 = tk.Radiobutton(self, bg='gray', fg='black', variable = self.radio_var, text='/0000-', value=1, borderwidth=0)
+        self.proc_0000 = tk.Radiobutton(self, bg='gray', fg='black', variable = self.radio_var, text='/0000-', value=1)
         self.proc_0000.grid(row=3, column=1)
         self.proc_0000.select()
         self.proc_00 = tk.Radiobutton(self, bg='gray', fg='black', variable = self.radio_var, text='/00-', value=2)
         self.proc_00.grid(row=3, column=2)
 
-
-        self.texto_saida = tk.Text(self, width=32, height=10,  bg='#125487', fg='orange', font='Courier 9')
+        self.texto_saida = tk.Text(self, width=32, height=10,  bg='#33425c', fg='orange', font='Courier 9')
         self.texto_saida.grid(row=4, columnspan=3)
-        self.texto_saida.insert(tk.INSERT,'Informe o NI e tecle <Enter>.\n\n')
+        self.texto_saida.insert(tk.INSERT,'Informe o NI ou processo e \ntecle <Enter>\n\n')
         self.entry_cpf.bind('<Return>', self.calcula_cpf)
         self.entry_cpf.bind('<KP_Enter>', self.calcula_cpf) # enter do teclado numérico
         self.entry_cnpj.bind('<Return>', self.calcula_cnpj)
@@ -49,8 +50,8 @@ class Application(tk.Frame):
         self.master.title('Calcula DV')
         self.master.configure(bg='gray')
         # dimensões da janela
-        largura = 250
-        altura = 280
+        largura = 260
+        altura = 262
         # resolução da tela
         largura_screen = self.master.winfo_screenwidth()
         altura_screen = self.master.winfo_screenheight()
@@ -68,7 +69,7 @@ class Application(tk.Frame):
         else:
             cpf_calc = None
             self.texto_saida.insert(tk.INSERT,
-                                    f'Informe a entrada com 9 ou 11 dígitos\n\n')
+                                    f'Informe a entrada com 9 ou 11 \ndígitos\n\n')
             self.texto_saida.see(tk.END)
 
         if cpf_calc is not None:
@@ -113,7 +114,7 @@ class Application(tk.Frame):
         else:
             cnpj_calc = None
             self.texto_saida.insert(tk.INSERT,
-                                    f'Informe a entrada com 14 ou 12 dígitos\n\n')
+                                    f'Informe a entrada com 14 ou 12 \ndígitos\n\n')
             self.texto_saida.see(tk.END)
 
         if cnpj_calc is not None:
@@ -167,10 +168,10 @@ class Application(tk.Frame):
             proc_calc = None
             if radio == 1:
                 self.texto_saida.insert(tk.INSERT,
-                                    f'Informe a entrada com 17 ou 15 dígitos\n\n')
+                                    f'Informe a entrada com 17 ou \n15 dígitos\n\n')
             else:
                 self.texto_saida.insert(tk.INSERT,
-                                    f'Informe a entrada com 15 ou 13 dígitos\n\n')
+                                    f'Informe a entrada com 15 ou \n13 dígitos\n\n')
             self.texto_saida.see(tk.END)
 
         if proc_calc is not None:
@@ -216,7 +217,7 @@ class Application(tk.Frame):
                     self.texto_saida.insert(tk.INSERT, f'{entrada_processo[:5]}-{entrada_processo[5:8]}.'
                                                        f'{entrada_processo[8:11]}/{entrada_processo[11:13]}-'
                                                        f'{entrada_processo[-2:]}'
-                                                       f' incorreto!\nDV calculado = {str(dv1) + str(dv2)}\n\n')
+                                                       f' \nincorreto! DV calculado = {str(dv1) + str(dv2)}\n\n')
             else:
                 if entrada_processo[-2:] == str(dv1) + str(dv2):
                     self.texto_saida.insert(tk.INSERT, f'{entrada_processo[:5]}-{entrada_processo[5:8]}.'
@@ -226,7 +227,7 @@ class Application(tk.Frame):
                     self.texto_saida.insert(tk.INSERT, f'{entrada_processo[:5]}-{entrada_processo[5:8]}.'
                                                        f'{entrada_processo[8:11]}/{entrada_processo[11:15]}-'
                                                        f'{entrada_processo[-2:]}'
-                                                       f' incorreto!\nDV calculado = {str(dv1) + str(dv2)}\n\n')
+                                                       f' \nincorreto! DV calculado = {str(dv1) + str(dv2)}\n\n')
             self.texto_saida.see(tk.END)
 
 def calcula_dv():
