@@ -2,7 +2,6 @@
 # backup_to_zip.py - Copia uma pasta e seu conteúdo para um arquivo Zip com nome incrementado.
 
 import os
-import sys
 import zipfile
 import datetime
 import tkinter as tk
@@ -20,9 +19,26 @@ class Application(tk.Frame):
         self.master = master
         self.icon = tk.PhotoImage(file='./image/Folder-icon.png')
         self.pack()
-        self.create_widgets()
-        self.layout()
+        self.configure(bg='gray')
 
+        '''cria os componentes da janela'''
+        tk.Label(self, text='Diretório:', bg= 'gray', fg='black').grid(row=0, column=0, sticky='e')
+        self.entry_dir = tk.Entry(self, bg='#125487', fg= 'orange', width= 45)
+        self.entry_dir.grid(row=0, column=1, columnspan=2)
+        self.entry_dir.insert(0, os.getcwd())
+        self.button_dir = tk.Button(self, text='>', image=self.icon, bg='#31363b', fg='white',
+                                    command=self.define_diretorio)
+        self.button_dir.grid(row=0, column=3, sticky='e')
+        self.button_dir.bind('<Escape>', self.exit) # com um Esc encera o programa
+        self.button_dir.focus()
+        # fora do Frame
+        tk.Button(self.master, text='Executar', anchor='n', bg='#31363b', fg='white',
+                                    command=self.testa_e_executa).pack()
+        self.separator = ttk.Separator(self.master, orient=tk.HORIZONTAL).pack(fill='x')
+        self.saída = tk.Listbox(self.master, width= 140, height= 43, bg= '#33425c', fg='orange', font= 'Mono 8')
+        self.saída.pack()
+
+        self.define_raiz()
 
     def define_diretorio(self, event=None):
         '''chama o filedialog do Tkinter para definir o diretório'''
@@ -45,44 +61,8 @@ class Application(tk.Frame):
         altura_screen = self.master.winfo_screenheight()
         # posição da janela
         posx = largura_screen / 2 - largura / 2  # meio da tela
-        posy = altura_screen / 4 - altura / 2  # meio da primeira tela
+        posy = altura_screen / 2 - altura / 2  # meio da primeira tela
         self.master.geometry('%dx%d+%d+%d' % (largura, altura, posx, posy))  # dimensões + posição inicial
-
-    def create_widgets(self):
-        '''cria os componentes da janela'''
-        self.label_dir = tk.Label(self, text='Diretório:')
-        self.entry_dir = tk.Entry(self)
-        self.button_dir = tk.Button(self, text='>', image=self.icon, bg='#31363b', fg='white',
-                                    command=self.define_diretorio)
-        # fora do Frame
-        self.button_run = tk.Button(self.master, text='Executar', anchor='n', bg='#31363b', fg='white',
-                                    command=self.testa_e_executa)
-        self.separator = ttk.Separator(self.master, orient=tk.HORIZONTAL)
-        self.saída = tk.Listbox(self.master)
-        self.button_dir.bind('<Escape>', self.exit) # com um Esc encera o programa
-
-    def layout(self):
-        '''define a posição dos componetntes da janela'''
-        self.define_raiz()
-        self.configure(bg='gray')
-        self.label_dir.grid(row=0, column=0, sticky='e')
-        self.label_dir['bg'] = 'gray'
-        self.label_dir['fg'] = 'black'
-        self.entry_dir.grid(row=0, column=1, columnspan=2)
-        self.entry_dir['bg'] = '#125487'
-        self.entry_dir['fg'] = 'orange'
-        self.entry_dir['width'] = 45
-        self.entry_dir.insert(0, os.getcwd())
-        self.button_dir.grid(row=0, column=3, sticky='e')
-        self.button_run.pack()
-        self.saída['width'] = 140
-        self.saída['height'] = 43
-        self.saída['bg'] = '#33425c'
-        self.saída['fg'] = 'orange'
-        self.saída['font'] = 'Mono 8'
-        self.separator.pack(fill='x')
-        self.saída.pack()
-        self.button_dir.focus()
 
     def testa_e_executa(self,event=None):
         '''verifica a validade dos parâmetros e chama o método de busca de arquivos'''

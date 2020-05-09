@@ -17,16 +17,100 @@ class Application(tk.Frame):
         self.valor_italico = tk.IntVar()
         self.valor_sublinhado = tk.IntVar()
         self.pack()
-        self.create_widgets()
-        self.layout()
+
+        '''cria os componentes da janela'''
+        # estilos
+        style = ttk.Style()
+        style.configure('Title.TLabel', foreground="black", background="gray", padding=4, font='Helvetica 12 bold')
+        style.configure('BG.TLabel', foreground="black", background="gray", padding=4)
+        style.configure('BW.TButton', foreground='#bfbfbf', background='#31363b', highlightbackground='black',
+                        width=51, font='Helvetica 11')
+        style.configure('BG.TCheckbutton', selectcolor='#818181', foreground="black", background="gray"
+                        , bd=2, width=11, anchor='w')
+        style.configure('Combo.TCombobox', foreground="black", background="gray", bordercolor='black')
+        style_button = {'width': 56, 'bg': '#31363b', 'fg': 'white', 'font': 'Helvetica 10', 'highlightbackground': 'black'}
+        self.configure(bg='gray')
+
+        # widgets
+        # formata texto
+        ttk.Label(self, text='Formata texto para nota', style='Title.TLabel').grid(row=0, column=0, columnspan=6)
+        ttk.Label(self, text='Estilo:', style='BG.TLabel').grid(row=1, column=0, sticky='w')
+        self.check_negrito = ttk.Checkbutton(self, text='Negrito', variable=self.valor_negrito, style='BG.TCheckbutton')
+        self.check_negrito.grid(row=1, column=1)
+        self.valor_negrito.set('1')
+        self.check_italico = ttk.Checkbutton(self, text='Itálico', variable=self.valor_italico, style='BG.TCheckbutton')
+        self.check_italico.grid(row=1, column=2)
+        self.check_sublinhado = ttk.Checkbutton(self, text='Sublinhado', variable=self.valor_sublinhado,
+                                                style='BG.TCheckbutton')
+        self.check_sublinhado.grid(row=1, column=3)
+        ttk.Label(self, text='Cor:', style='BG.TLabel').grid(row=2, column=1, sticky='e')
+        self.combo_color = ttk.Combobox(self, values=['Normal', 'Azul', 'Verde','Vermelho' ], style='Combo.TCombobox',
+                                        exportselection=0)
+        self.combo_color.grid(row=2, column=2)
+        self.combo_color.set('Normal')
+        self.texto_nota = tk.Text(self, width=65, height=5, bg='#125487', fg='orange', font='Arial 10')
+        self.texto_nota.grid(row=3, columnspan=6)
+        self.texto_nota.insert(
+            tk.INSERT,'Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM.')
+        self.texto_nota.bind('<Escape>', self.exit)  # com um Esc encera o programa
+        ttk.Button(self, text='Gera nota formatada', style='BW.TButton', command=self.formata_texto_nota).grid(
+            row=4, column=0, columnspan=6)
+        ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=5, columnspan=6, padx=10, pady=5, sticky=tk.EW)
+
+        # Inclui url
+        ttk.Label(self, text='Inclui link (url) em nota', style='Title.TLabel').grid(row=6, column=0, columnspan=6)
+        ttk.Label(self, text='Link:', style='BG.TLabel').grid(row=7, column=0, sticky='w')
+        self.entry_link = tk.Entry(self, bg='#125487', fg='orange', width=65, font='Arial 10')
+        self.entry_link.grid(row=8, columnspan=6)
+        self.entry_link.insert(0, 'http://receita.economia.gov.br/')
+        self.entry_link.bind('<Escape>', self.exit)  # com um Esc encera o programa
+        ttk.Button(self, text='Gera link para url', style='BW.TButton',
+                   command=self.link_url).grid(row=9, column=0, columnspan=6)
+        ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=10, columnspan=6, padx=10, pady=5, sticky=tk.EW)
+
+        # Inclui link para processo
+        self.label_titulo_3 = ttk.Label(self, text='Inclui link para outro processo em nota',
+                                        style='Title.TLabel').grid(row=11, columnspan=6)
+        ttk.Label(self, text='Processo:', style='BG.TLabel').grid(row=12, column=0, sticky='w')
+        self.entry_processo = tk.Entry(self, bg='#125487', fg='orange', width=65, font='Arial 10')
+        self.entry_processo.grid(row=13, columnspan=6)
+        self.entry_processo.bind('<Escape>', self.exit)  # com um Esc encera o programa
+        ttk.Button(self, text='Gera link para outro processo', style='BW.TButton',
+                  command=self.link_processo).grid(row=14, column=0, columnspan=6)
+        ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=15, columnspan=6, padx=10, pady=5, sticky=tk.EW)
+
+        # Transpõe processos
+        ttk.Label(self, text='Transpõe relação de processos copiados na memória',
+                                        style='Title.TLabel').grid(row=16, columnspan=6)
+        ttk.Button(self, text='Gera relação transposta', style='BW.TButton',
+                  command=self.transpoe_clipboard).grid(row=17, column=0, columnspan=6)
+        ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=18, columnspan=6, padx=10, pady=5, sticky=tk.EW)
+
+        # Abre funcionalidades
+        ttk.Label(self, text='Abre funcionalidades',style='Title.TLabel').grid(row=19, columnspan=6)
+        ttk.Button(self, text='Abre Caixa de Trabalho', style='BW.TButton',
+                  command=self.abre_caixa_trabalho).grid(row=20, column=0, columnspan=6)
+        ttk.Button(self, text='Abre Gerencial de Estoque', style='BW.TButton',
+                  command=self.abre_gerencial_estoque).grid(row=21, column=0, columnspan=6)
+        ttk.Button(self, text='Abre Consulta', style='BW.TButton',
+                  command=self.abre_consulta).grid(row=22, column=0, columnspan=6)
+        ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=23, columnspan=6, padx=10, pady=5, sticky=tk.EW)
+
+        # Text de sáida - parent = raiz
+        self.texto_saida = tk.Text(self.master, width=65, height=10,  bg='#125487', fg='orange', font='Courier 9')
+        self.texto_saida.pack()
+        self.texto_saida.bind('<Escape>', self.exit)  # com um Esc encera o programa
+        self.texto_saida.focus()
+        self.define_raiz()
 
     def define_raiz(self):
         '''Define caracterísicas da janela'''
+
         self.master.title('e-Processo')
         self.master.configure(bg='gray')
         # dimensões da janela
         largura = 510
-        altura = 800
+        altura = 810
         # resolução da tela
         largura_screen = self.master.winfo_screenwidth()
         altura_screen = self.master.winfo_screenheight()
@@ -34,94 +118,6 @@ class Application(tk.Frame):
         posx = largura_screen / 2 - largura / 2  # meio da tela
         posy = altura_screen / 2 - altura / 2  # meio da primeira tela
         self.master.geometry('%dx%d+%d+%d' % (largura, altura, posx, posy))  # dimensões + posição inicial
-
-    def create_widgets(self):
-        '''cria os componentes da janela'''
-        style = ttk.Style()
-        style.configure('Title.TLabel', foreground="black", background="gray", padding=4, font='Helvetica 11 bold')
-        style.configure('BG.TLabel', foreground="black", background="gray", padding=4)
-        style.configure('BW.TButton', foreground='#bfbfbf', background='#31363b', highlightbackground='black', width=50)
-        style.configure('BG.TCheckbutton', selectcolor='#818181', foreground="black", background="gray"
-                        , bd=2, width=11, anchor='w')
-        style.configure('Combo.TCombobox', foreground="black", background="gray", bordercolor='black')
-        style_button = {'width': 56, 'bg': '#31363b', 'fg': 'white', 'font': 'Helvetica 10', 'highlightbackground': 'black'}
-
-        self.label_titulo_1 = ttk.Label(self, text='Formata texto para nota', style='Title.TLabel')
-        self.button_1 = tk.Button(self,  style_button, text='Gera nota formatada', command=self.formata_texto_nota,)
-
-        self.label2 = ttk.Label(self, text='Estilo:', style='BG.TLabel')
-        self.check_negrito = ttk.Checkbutton(self, text='Negrito', variable=self.valor_negrito, style='BG.TCheckbutton')
-        self.check_italico = ttk.Checkbutton(self, text='Itálico', variable=self.valor_italico, style='BG.TCheckbutton')
-        self.check_sublinhado = ttk.Checkbutton(self, text='Sublinhado', variable=self.valor_sublinhado,
-                                                style='BG.TCheckbutton')
-        self.label_color = ttk.Label(self, text='Cor:', style='BG.TLabel')
-        self.combo_color = ttk.Combobox(self, values=['Normal', 'Azul', 'Verde','Vermelho' ], style='Combo.TCombobox',
-                                        exportselection=0)
-        self.texto_nota = tk.Text(self, width=65, height=5, bg='#125487', fg='orange', font='Arial 10')
-        self.separator_texto = ttk.Separator(self, orient=tk.HORIZONTAL)
-        self.label_titulo_2 = ttk.Label(self, text='Inclui link (url) em nota', style='Title.TLabel')
-        self.button_2 = tk.Button(self, style_button, text='Gera link para url', command=self.link_url)
-        self.label3 = ttk.Label(self, text='Link:', style='BG.TLabel')
-        self.entry_link = tk.Entry(self, bg='#125487', fg='orange', width=65, font='Arial 10')
-        self.separator_link = ttk.Separator(self, orient=tk.HORIZONTAL)
-        self.label_titulo_3 = ttk.Label(self, text='Inclui link para outro processo em nota', style='Title.TLabel')
-        self.button_3 = tk.Button(self, style_button, text='Gera link para outro processo', command=self.link_processo)
-        self.label4 = ttk.Label(self, text='Processo:', style='BG.TLabel')
-        self.entry_processo = tk.Entry(self, bg='#125487', fg='orange', width=65, font='Arial 10')
-        self.separator_processo = ttk.Separator(self, orient=tk.HORIZONTAL)
-        self.label_titulo_4 = ttk.Label(self, text='Transpõe relação de processos copiados na memória',
-                                        style='Title.TLabel')
-        self.button_4 = tk.Button(self, style_button, text='Gera relação transposta', command=self.transpoe_clipboard)
-        self.separator_transpor = ttk.Separator(self, orient=tk.HORIZONTAL)
-        self.label_titulo_5 = ttk.Label(self, text='Abre funcionalidades',style='Title.TLabel')
-        self.button_5 = tk.Button(self, style_button, text='Abre caixa de trabalho',command=self.abre_caixa_trabalho)
-        self.button_6 = tk.Button(self, style_button, text='Abre gerencial de estoque', command=self.abre_gerencial_estoque)
-        self.button_7 = tk.Button(self, style_button, text='Abre consulta', command=self.abre_consulta)
-        self.separator_abre = ttk.Separator(self, orient=tk.HORIZONTAL)
-        self.texto_saida = tk.Text(self.master, width=65, height=10,  bg='#125487', fg='orange', font='Courier 9')
-        self.texto_nota.bind('<Escape>', self.exit)  # com um Esc encera o programa
-        self.entry_link.bind('<Escape>', self.exit)  # com um Esc encera o programa
-        self.entry_processo.bind('<Escape>', self.exit)  # com um Esc encera o programa
-        self.texto_saida.bind('<Escape>', self.exit)  # com um Esc encera o programa
-
-    def layout(self):
-        '''define a posição dos componentes da janela'''
-        self.define_raiz()
-        self.configure(bg='gray')
-        self.label_titulo_1.grid(row=0, column=0, columnspan=6)
-        self.label2.grid(row=1, column=0, sticky='w')
-        self.check_negrito.grid(row=1, column=1)
-        self.valor_negrito.set('1')
-        self.check_italico.grid(row=1, column=2)
-        self.check_sublinhado.grid(row=1, column=3)
-        self.label_color.grid(row=2, column=1, sticky='e')
-        self.combo_color.grid(row=2, column=2)
-        self.combo_color.set('Normal')
-        self.texto_nota.grid(row=3, columnspan=6)
-        self.texto_nota.insert(tk.INSERT,'Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM.')
-        self.button_1.grid(row=4, column=0, columnspan=6)
-        self.separator_texto.grid(row=5, columnspan=6, padx=10, pady=5, sticky=tk.EW)
-        self.label_titulo_2.grid(row=6, column=0, columnspan=6)
-        self.label3.grid(row=7, column=0, sticky='w')
-        self.entry_link.grid(row=8, columnspan=6)
-        self.entry_link.insert(0, 'http://receita.economia.gov.br/')
-        self.button_2.grid(row=9, column=0, columnspan=6)
-        self.separator_link.grid(row=10, columnspan=6, padx=10, pady=5, sticky=tk.EW)
-        self.label_titulo_3.grid(row=11, columnspan=6)
-        self.label4.grid(row=12, column=0, sticky='w')
-        self.entry_processo.grid(row=13, columnspan=6)
-        self.button_3.grid(row=14, column=0, columnspan=6)
-        self.separator_processo.grid(row=15, columnspan=6, padx=10, pady=5, sticky=tk.EW)
-        self.label_titulo_4.grid(row=16, columnspan=6)
-        self.button_4.grid(row=17, column=0, columnspan=6)
-        self.separator_transpor.grid(row=18, columnspan=6, padx=10, pady=5, sticky=tk.EW)
-        self.label_titulo_5.grid(row=19, columnspan=6)
-        self.button_5.grid(row=20, column=0, columnspan=6)
-        self.button_6.grid(row=21, column=0, columnspan=6)
-        self.button_7.grid(row=22, column=0, columnspan=6)
-        self.separator_abre.grid(row=23, columnspan=6, padx=10, pady=5, sticky=tk.EW)
-        self.texto_saida.pack()
-        self.texto_saida.focus()
 
     def exit(self, event=None):
         self.master.destroy()
@@ -228,7 +224,6 @@ def e_processo():
     root = tk.Tk()
     app = Application(master=root)
     app.mainloop()
-
 
 if __name__ == '__main__':  # executa se chamado diretamente
     e_processo()
