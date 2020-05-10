@@ -3,23 +3,23 @@
 
 
 from tkinter import *
-import backup_to_zip
-import copiaSeletivaGui
-import regex_file
-import regex_clipboard
-import pdfToText
-import docxToText
-import transpose_clipboard
-import mapIt
-import google_rfb
-import combinePdfsGui
-import converterCsvParaExcelGui
-import converterExcelparaCsvGui
-import busca_arquivos_grandes
-import salva_clipboard
-import transposeCells
-import eProcesso
-import calcula_dv
+# import backup_to_zip
+# import copiaSeletivaGui
+# import regex_file
+# import regex_clipboard
+# import pdfToText
+# import docxToText
+# import transpose_clipboard
+# import mapIt
+# import google_rfb
+# import combinePdfsGui
+# import converterCsvParaExcelGui
+# import converterExcelparaCsvGui
+# import busca_arquivos_grandes
+# import salva_clipboard
+# import transposeCells
+# import eProcesso
+# import calcula_dv
 
 
 class App:
@@ -30,7 +30,8 @@ class App:
                         'Converte pdf para texto', 'Converte docx para texto', 'Transpor clipboard',
                         'Abre endereço no Maps', 'Google RFB','Concaternar pdf', 'Converte csv para xslx',
                         'Converte xlsx para csv', 'Busca arquivos grandes', 'Salva e recupera texto do clipboard',
-                        'Transpõe xlsx (linhas x colunas)', 'e-Processo', 'Cálculo de Dígitos Verificadores']
+                        'Transpõe xlsx (linhas x colunas)', 'e-Processo', 'Cálculo de Dígitos Verificadores',
+                        'Relaciona Arquivos por Extensão']
         self.choices = sorted(self.choices)
         self.define_raiz()
         self.create_widgets()
@@ -57,56 +58,77 @@ class App:
         if choice is None:
             print('Tchau!')
         elif choice == 'Backup to Zip':
+            import backup_to_zip
             print('Executando backup_tp_zip')
             backup_to_zip.backup_to_zip()
         elif choice == 'Cópia por extensão':
+            import copiaSeletivaGui
             print('Executando copiaSeletivaGui')
             copiaSeletivaGui.copyByExtension()
         elif choice == 'Regex - arquivo':
+            import regex_file
             print('Executando regex_file')
             regex_file.regex_file()
         elif choice == 'Regex - clipboard':
+            import regex_clipboard
             print('Executando regex_clipboard')
             regex_clipboard.regex_clipboard()
         elif choice == 'Converte pdf para texto':
+            import pdfToText
             print('Executando pdfToText')
             pdfToText.pdf_to_text()
         elif choice == 'Converte docx para texto':
+            import docxToText
             print('Executando docxToText')
             docxToText.docx_to_text()
         elif choice == 'Transpor clipboard':
             print('Executando transpose_clipboard')
+            import transpose_clipboard
             transpose_clipboard.transpose_clipboard()
         elif choice == 'Abre endereço no Maps':
+            import mapIt
             print('Executando mapIt')
             mapIt.mapIt()
         elif choice == 'Google RFB':
+            import google_rfb
             print('Executando google_rfb')
             google_rfb.google_rfb()
         elif choice == 'Concaternar pdf':
+            import combinePdfsGui
             print('Executando combinePdfsGui')
             combinePdfsGui.combinePdfsGui()
         elif choice == 'Converte csv para xslx':
             print('Executando converterCsvParaExcelGui')
+            import converterCsvParaExcelGui
             converterCsvParaExcelGui.converterCsvParaExcel()
         elif choice == 'Converte xlsx para csv':
             print('Executando converterExcelparaCsvGui')
+            import converterExcelparaCsvGui
             converterExcelparaCsvGui.converterExcelParaCsv()
         elif choice == 'Busca arquivos grandes':
+            import busca_arquivos_grandes
             print('Executando buscaArquivosGrandes')
             busca_arquivos_grandes.busca_arquivos_grandes()
         elif choice == 'Salva e recupera texto do clipboard':
+            import salva_clipboard
             print('Executando salva_clipboard')
             salva_clipboard.salva_clipboard()
         elif choice == 'Transpõe xlsx (linhas x colunas)':
             print('Executando transposeCells')
+            import transposeCells
             transposeCells.transposeCells()
         elif choice == 'e-Processo':
             print('Executando e_processo')
+            import eProcesso
             eProcesso.e_processo()
         elif choice == 'Cálculo de Dígitos Verificadores':
             print('Executando calcula_dv')
+            import calcula_dv
             calcula_dv.calcula_dv()
+        elif choice == 'Relaciona Arquivos por Extensão':
+            print('Executando relaciona_arquivos_extensao')
+            import relaciona_arquivos_extensao
+            relaciona_arquivos_extensao.run()
 
     def choice_select(self, event):
         '''Recupera o item selecionado no Listbox e chama o método chama_rotina()'''
