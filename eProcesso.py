@@ -6,6 +6,7 @@ import pyperclip  # manipulação de arquivos binários, clipboard e leitura de 
 import tkinter as tk
 import tkinter.ttk as ttk
 import webbrowser
+import time
 
 
 class Application(tk.Frame):
@@ -88,14 +89,16 @@ class Application(tk.Frame):
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=18, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Abre funcionalidades
-        ttk.Label(self, text='Abre funcionalidades',style='Title.TLabel').grid(row=19, columnspan=6)
+        ttk.Label(self, text='Abre funções / processos',style='Title.TLabel').grid(row=19, columnspan=6)
         tk.Button(self, style_button ,text='Abre Caixa de Trabalho', command=self.abre_caixa_trabalho).grid(row=20,
                                                                                                 column=0, columnspan=6)
         tk.Button(self, style_button, text='Abre Gerencial de Estoque',
                   command=self.abre_gerencial_estoque).grid(row=21, column=0, columnspan=6)
         tk.Button(self, style_button, text='Abre Consulta',
                   command=self.abre_consulta).grid(row=22, column=0, columnspan=6)
-        ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=23, columnspan=6, padx=10, pady=5, sticky=tk.EW)
+        tk.Button(self, style_button, text='Abre processos da área de transferência (clipboard)',
+                  command=self.abre_processos).grid(row=23, column=0, columnspan=6)
+        ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=24, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Text de sáida - parent = raiz
         self.texto_saida = tk.Text(self.master, width=65, height=10,  bg='#33425c', fg='orange', font='Courier 9')
@@ -111,7 +114,7 @@ class Application(tk.Frame):
         self.master.configure(bg='gray')
         # dimensões da janela
         largura = 510
-        altura = 810
+        altura = 835
         # resolução da tela
         largura_screen = self.master.winfo_screenwidth()
         altura_screen = self.master.winfo_screenheight()
@@ -219,6 +222,15 @@ class Application(tk.Frame):
     def abre_consulta(self, event=None):
         webbrowser.open("https://eprocesso.suiterfb.receita.fazenda/eprocesso/index.html#/consultaProcesso")
 
+    def abre_processos(self, event=None):
+        mem = pyperclip.paste()
+        if ',' in mem:
+            mem = mem.split(',')
+        else:
+            mem = mem.split()
+        for processo in mem:
+            webbrowser.open(f'https://eprocesso.suiterfb.receita.fazenda/ControleVisualizacaoProcesso.asp?psAcao=exibir&psNumeroProcesso={processo}')
+            time.sleep(0.5)
 
 def e_processo():
     '''busca arquivos de valor maior ou igual a um valor dado em um diretório'''
