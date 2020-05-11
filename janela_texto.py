@@ -15,7 +15,7 @@ def janela_texto(titulo='', label='', texto=''):
     altura_screen = root.winfo_screenheight()
     # posição da janela
     posx = largura_screen / 2 - largura / 2  # meio da tela
-    posy = altura_screen / 4 - altura / 2  # meio da primeira tela
+    posy = altura_screen / 2 - altura / 2  # meio da primeira tela
     root.geometry('%dx%d+%d+%d' % (largura, altura, posx, posy))  # dimensões + posição inicial
 
     label_topo = tk.Label(root,text=label, width=140, bg='gray', fg='black', anchor='w')

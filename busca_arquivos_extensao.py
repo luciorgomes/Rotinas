@@ -26,7 +26,7 @@ class Application(tk.Frame):
         tk.Label(self, text='Diretório:', bg= 'gray', fg='black').grid(row=0, column=0, sticky='e', ipady=3)
         self.entry_dir = tk.Entry(self, bg='#125487', fg= 'orange', width=45)
         self.entry_dir.grid(row=0, column=1, columnspan=2)
-        self.entry_dir.insert(0, os.path.expanduser('~/')) # home directory
+        self.entry_dir.insert(0, os.path.expanduser('~')) # home directory
         self.button_dir = tk.Button(self, text='>', image=self.icon, bg='#31363b', fg='white',
                                     command=self.define_diretorio_busca)
         self.button_dir.grid(row=0, column=3, sticky='e')
@@ -46,7 +46,7 @@ class Application(tk.Frame):
         tk.Label(self, text='Destino:', bg='gray', fg='black').grid(row=3, column=0, sticky='e', ipady=3)
         self.entry_destino = tk.Entry(self, bg='#125487', fg='orange', width=45)
         self.entry_destino.grid(row=3, column=1, columnspan=2)
-        self.entry_destino.insert(0, os.path.expanduser('~/teste')) # home directory
+        self.entry_destino.insert(0, os.path.expanduser('~')) # home directory
         self.button_destino = tk.Button(self, text='>', image=self.icon, bg='#31363b', fg='white',
                                     command=self.define_diretorio_destino)
         self.button_destino.grid(row=3, column=3, sticky='e')
