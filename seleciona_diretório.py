@@ -2,12 +2,12 @@ from tkinter import filedialog
 import tkinter as tk
 import os
 
-def seleciona_diretorio(titulo=''):
+def seleciona_diretorio(titulo='', diretorio_inicial=''):
     '''chama o filedialog do Tkinter para definir o diretótio'''
     root = tk.Tk()
     root.option_add('*foreground', 'gray')  # altera a cor da fonte
     root.withdraw()  # esconde a 'root' criada por ser desnecessária
-    folder_diag = filedialog.askdirectory(title=titulo)
+    folder_diag = filedialog.askdirectory(title=titulo, initialdir=diretorio_inicial)
     root.destroy()
     try:
         os.chdir(folder_diag)  # altera o diretório de trabalho para a pasta 'folder'
@@ -21,4 +21,4 @@ def seleciona_diretorio(titulo=''):
 
 
 if __name__ == '__main__': # executa se chamado diretamente
-    print(seleciona_diretorio())
+    print(seleciona_diretorio(diretorio_inicial='/home'))

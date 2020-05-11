@@ -28,13 +28,6 @@ def janela_texto(titulo='', label='', texto=''):
     text.pack()
     #
     text.tag_add("all", "1.0", 'end')
-    # text.tag_add("start", "1.8", "1.13")
-    # text.tag_add("segunda", "2.8", "2.13")
-    # text.tag_add("segunda", "2.1",'end')
-    # text.tag_config("here", background="yellow", foreground="blue")
-    # text.tag_config("start", background="black", foreground="green")
-    # text.tag_config("segunda", background="black", foreground="green")
-    #text.tag_config('all', background='#125487',foreground='orange', font = 'Mono 10')
     conteudo = titulo +'\n\n' + label +'\n\n' + texto
     print(conteudo)
     pyperclip.copy(conteudo)
@@ -45,9 +38,6 @@ def janela_texto(titulo='', label='', texto=''):
     root.bind('<Escape>', exit)  # com um Esc encera o programa
 
     root.mainloop()
-
-
-
 
 if __name__ == '__main__': # executa se chamado diretamente
     janela_texto('1', '2', '3\n.......')

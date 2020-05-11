@@ -26,12 +26,12 @@ class App:
     def __init__(self):
         self.root = Tk()
         '''Instancia o Frame com o Listbox com a relação de rotinas'''
-        self.choices = ['Backup to Zip', 'Cópia por extensão', 'Regex - arquivo', 'Regex - clipboard',
+        self.choices = ['Backup to Zip', 'Regex - arquivo', 'Regex - clipboard',
                         'Converte pdf para texto', 'Converte docx para texto', 'Transpor clipboard',
-                        'Abre endereço no Maps', 'Google RFB','Concaternar pdf', 'Converte csv para xslx',
+                        'Abre endereço no Maps', 'Google RFB','Concaternar arquivos pdf', 'Converte csv para xslx',
                         'Converte xlsx para csv', 'Busca arquivos grandes', 'Salva e recupera texto do clipboard',
-                        'Transpõe xlsx (linhas x colunas)', 'e-Processo', 'Cálculo de Dígitos Verificadores',
-                        'Relaciona Arquivos por Extensão']
+                        'Transpõe xlsx (linhas x colunas)', 'e-Processo', 'Cálculo de dígitos verificadores',
+                        'Busca arquivos por extensão']
         self.choices = sorted(self.choices)
         self.define_raiz()
         self.create_widgets()
@@ -61,10 +61,6 @@ class App:
             import backup_to_zip
             print('Executando backup_tp_zip')
             backup_to_zip.backup_to_zip()
-        elif choice == 'Cópia por extensão':
-            import copiaSeletivaGui
-            print('Executando copiaSeletivaGui')
-            copiaSeletivaGui.copyByExtension()
         elif choice == 'Regex - arquivo':
             import regex_file
             print('Executando regex_file')
@@ -93,7 +89,7 @@ class App:
             import google_rfb
             print('Executando google_rfb')
             google_rfb.google_rfb()
-        elif choice == 'Concaternar pdf':
+        elif choice == 'Concaternar arquivos pdf':
             import combinePdfsGui
             print('Executando combinePdfsGui')
             combinePdfsGui.combinePdfsGui()
@@ -121,14 +117,14 @@ class App:
             print('Executando e_processo')
             import eProcesso
             eProcesso.e_processo()
-        elif choice == 'Cálculo de Dígitos Verificadores':
+        elif choice == 'Cálculo de dígitos verificadores':
             print('Executando calcula_dv')
             import calcula_dv
             calcula_dv.calcula_dv()
-        elif choice == 'Relaciona Arquivos por Extensão':
-            print('Executando relaciona_arquivos_extensao')
-            import relaciona_arquivos_extensao
-            relaciona_arquivos_extensao.run()
+        elif choice == 'Busca arquivos por extensão':
+            print('Executando busca_arquivos_extensao')
+            import busca_arquivos_extensao
+            busca_arquivos_extensao.busca_arquivos_extensao()
 
     def choice_select(self, event):
         '''Recupera o item selecionado no Listbox e chama o método chama_rotina()'''
