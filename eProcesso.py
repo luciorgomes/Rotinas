@@ -23,8 +23,8 @@ class Application(tk.Frame):
         style = ttk.Style()
         style.configure('Title.TLabel', foreground="black", background="gray", padding=4, font='Helvetica 12 bold')
         style.configure('BG.TLabel', foreground="black", background="gray", padding=4)
-        style.configure('BW.TButton', foreground='#bfbfbf', background='#31363b', highlightbackground='black',
-                        width=51, font='Helvetica 11')
+        style.configure('BW.TButton', foreground='#bfbfbf', background='black', highlightbackground='black',
+                       width=51, font='Helvetica 11')
         style.configure('BG.TCheckbutton', selectcolor='#818181', foreground="black", background="gray"
                         , bd=2, width=11, anchor='w')
         style.configure('Combo.TCombobox', foreground="black", background="gray", bordercolor='black')
@@ -54,7 +54,7 @@ class Application(tk.Frame):
         self.texto_nota.insert(
             tk.INSERT,'Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM.')
         self.texto_nota.bind('<Escape>', self.exit)  # com um Esc encera o programa
-        ttk.Button(self, text='Gera nota formatada', style='BW.TButton', command=self.formata_texto_nota).grid(
+        tk.Button(self, style_button, text='Gera nota formatada', command=self.formata_texto_nota).grid(
             row=4, column=0, columnspan=6)
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=5, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
@@ -65,8 +65,8 @@ class Application(tk.Frame):
         self.entry_link.grid(row=8, columnspan=6)
         self.entry_link.insert(0, 'http://receita.economia.gov.br/')
         self.entry_link.bind('<Escape>', self.exit)  # com um Esc encera o programa
-        ttk.Button(self, text='Gera link para url', style='BW.TButton',
-                   command=self.link_url).grid(row=9, column=0, columnspan=6)
+        tk.Button(self, style_button ,text='Gera link para url', command=self.link_url).grid(row=9,
+                                                                                             column=0, columnspan=6)
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=10, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Inclui link para processo
@@ -76,24 +76,24 @@ class Application(tk.Frame):
         self.entry_processo = tk.Entry(self, bg='#33425c', fg='orange', width=65, font='Arial 10')
         self.entry_processo.grid(row=13, columnspan=6)
         self.entry_processo.bind('<Escape>', self.exit)  # com um Esc encera o programa
-        ttk.Button(self, text='Gera link para outro processo', style='BW.TButton',
-                  command=self.link_processo).grid(row=14, column=0, columnspan=6)
+        tk.Button(self, style_button , text='Gera link para outro processo', command=self.link_processo).grid(row=14,
+                                                                                            column=0, columnspan=6)
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=15, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Transpõe processos
         ttk.Label(self, text='Transpõe relação de processos copiados na memória',
                                         style='Title.TLabel').grid(row=16, columnspan=6)
-        ttk.Button(self, text='Gera relação transposta', style='BW.TButton',
-                  command=self.transpoe_clipboard).grid(row=17, column=0, columnspan=6)
+        tk.Button(self, style_button , text='Gera relação transposta', command=self.transpoe_clipboard).grid(row=17,
+                                                                                            column=0, columnspan=6)
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=18, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Abre funcionalidades
         ttk.Label(self, text='Abre funcionalidades',style='Title.TLabel').grid(row=19, columnspan=6)
-        ttk.Button(self, text='Abre Caixa de Trabalho', style='BW.TButton',
-                  command=self.abre_caixa_trabalho).grid(row=20, column=0, columnspan=6)
-        ttk.Button(self, text='Abre Gerencial de Estoque', style='BW.TButton',
+        tk.Button(self, style_button ,text='Abre Caixa de Trabalho', command=self.abre_caixa_trabalho).grid(row=20,
+                                                                                                column=0, columnspan=6)
+        tk.Button(self, style_button, text='Abre Gerencial de Estoque',
                   command=self.abre_gerencial_estoque).grid(row=21, column=0, columnspan=6)
-        ttk.Button(self, text='Abre Consulta', style='BW.TButton',
+        tk.Button(self, style_button, text='Abre Consulta',
                   command=self.abre_consulta).grid(row=22, column=0, columnspan=6)
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=23, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
