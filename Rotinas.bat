@@ -1,2 +1,3 @@
-python.exe "C:\Users\lucio\PycharmProjects\Rotinas\choice_box.py"
+cd "C:\Users\90430654987\PycharmProjects\Rotinas"
+python.exe "C:\Users\90430654987\PycharmProjects\Rotinas\rotinas.py"
 pause
