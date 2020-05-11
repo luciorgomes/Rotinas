@@ -157,9 +157,15 @@ class Application(tk.Frame):
                         if filename.endswith('.' + extension) and foldername != new_folder:
                             print('Encontrado ' + filename + ', registrando em ' + file.name)
                             if copia_arquivos == 1: # gera a relação e copia os arquivos
-                                shutil.copy(os.path.join(foldername, filename), new_folder)
+                                try:
+                                    shutil.copy(os.path.join(foldername, filename), new_folder)
+                                except shutil.SameFileError:
+                                    continue
                             file_path = os.path.join(foldername, filename) + '\n'
-                            file.write(file_path)
+                            try:
+                                file.write(file_path)
+                            except UnicodeEncodeError:
+                                file.write('Unicode error\n')
                             texto_saída += file_path
                             finded += 1
                 file.write('Finded ' + str(finded) + ' files.')
@@ -174,9 +180,15 @@ class Application(tk.Frame):
                     if filename.endswith('.' + extension) and folder != new_folder:
                         print('Encontrado ' + filename + ', registrando em ' + file.name)
                         if copia_arquivos == 1:  # gera a relação e copia os arquivos
-                            shutil.copy(os.path.join(folder, filename), new_folder)
+                            try:
+                                shutil.copy(os.path.join(foldername, filename), new_folder)
+                            except shutil.SameFileError:
+                                continue
                         file_path = os.path.join(folder, filename) + '\n'
-                        file.write(file_path)
+                        try:
+                            file.write(file_path)
+                        except UnicodeEncodeError:
+                            file.write('Unicode error\n')
                         texto_saída += file_path
                         finded += 1
                 file.write('Finded ' + str(finded) + ' files.')
