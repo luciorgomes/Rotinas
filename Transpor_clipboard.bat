@@ -1,0 +1,1 @@
+C:\Users\90430654987\AppData\Local\Programs\Python\Python38\python.exe "C:\Users\90430654987\PycharmProjects\Rotinas\transpose_clipboard.py"
