@@ -22,8 +22,8 @@ class Application(tk.Frame):
         '''cria os componentes da janela'''
         # estilos
         style = ttk.Style()
-        style.configure('Title.TLabel', foreground="black", background="gray", padding=4, font='Helvetica 12 bold')
-        style.configure('BG.TLabel', foreground="black", background="gray", padding=4)
+        style.configure('Title.TLabel', foreground="black", background="gray", padding=2, font='Helvetica 11 bold')
+        style.configure('BG.TLabel', foreground="black", background="gray", padding=2)
         style.configure('BW.TButton', foreground='#bfbfbf', background='black', highlightbackground='black',
                        width=51, font='Helvetica 11')
         style.configure('BG.TCheckbutton', selectcolor='#818181', foreground="black", background="gray"
@@ -101,7 +101,7 @@ class Application(tk.Frame):
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=24, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Text de sáida - parent = raiz
-        self.texto_saida = tk.Text(self.master, width=65, height=10,  bg='#33425c', fg='orange', font='Courier 9')
+        self.texto_saida = tk.Text(self.master, width=65, height=8,  bg='#33425c', fg='orange', font='Courier 9')
         self.texto_saida.pack()
         self.texto_saida.bind('<Escape>', self.exit)  # com um Esc encera o programa
         self.texto_saida.focus()
@@ -113,8 +113,8 @@ class Application(tk.Frame):
         self.master.title('e-Processo')
         self.master.configure(bg='gray')
         # dimensões da janela
-        largura = 510
-        altura = 835
+        largura = 480
+        altura = 760
         # resolução da tela
         largura_screen = self.master.winfo_screenwidth()
         altura_screen = self.master.winfo_screenheight()
