@@ -25,11 +25,11 @@ class Application(tk.Frame):
         style.configure('Title.TLabel', foreground="black", background="gray", padding=2, font='Helvetica 11 bold')
         style.configure('BG.TLabel', foreground="black", background="gray", padding=2)
         style.configure('BW.TButton', foreground='#bfbfbf', background='black', highlightbackground='black',
-                       width=51, font='Helvetica 11')
+                       width=48, font='Helvetica 11')
         style.configure('BG.TCheckbutton', selectcolor='#818181', foreground="black", background="gray"
-                        , bd=2, width=11, anchor='w')
+                        , bd=2, width=10, anchor='w')
         style.configure('Combo.TCombobox', foreground="black", background="gray", bordercolor='black')
-        style_button = {'width': 56, 'bg': '#31363b', 'fg': 'white', 'font': 'Helvetica 10',
+        style_button = {'width': 48, 'bg': '#31363b', 'fg': 'white', 'font': 'Helvetica 10',
                         'highlightbackground': 'black'}
         self.configure(bg='gray')
 
@@ -50,7 +50,7 @@ class Application(tk.Frame):
                                         exportselection=0)
         self.combo_color.grid(row=2, column=2)
         self.combo_color.set('Normal')
-        self.texto_nota = tk.Text(self, width=65, height=5, bg='#33425c', fg='orange', font='Arial 10') #bg original ='#125487'
+        self.texto_nota = tk.Text(self, width=56, height=5, bg='#33425c', fg='orange', font='Arial 10') #bg original ='#125487'
         self.texto_nota.grid(row=3, columnspan=6)
         self.texto_nota.insert(
             tk.INSERT,'Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM.')
@@ -62,7 +62,7 @@ class Application(tk.Frame):
         # Inclui url
         ttk.Label(self, text='Inclui link (url) em nota', style='Title.TLabel').grid(row=6, column=0, columnspan=6)
         ttk.Label(self, text='Link:', style='BG.TLabel').grid(row=7, column=0, sticky='w')
-        self.entry_link = tk.Entry(self, bg='#33425c', fg='orange', width=65, font='Arial 10')
+        self.entry_link = tk.Entry(self, bg='#33425c', fg='orange', width=56, font='Arial 10')
         self.entry_link.grid(row=8, columnspan=6)
         self.entry_link.insert(0, 'http://receita.economia.gov.br/')
         self.entry_link.bind('<Escape>', self.exit)  # com um Esc encera o programa
@@ -74,7 +74,7 @@ class Application(tk.Frame):
         self.label_titulo_3 = ttk.Label(self, text='Inclui link para outro processo em nota',
                                         style='Title.TLabel').grid(row=11, columnspan=6)
         ttk.Label(self, text='Processo:', style='BG.TLabel').grid(row=12, column=0, sticky='w')
-        self.entry_processo = tk.Entry(self, bg='#33425c', fg='orange', width=65, font='Arial 10')
+        self.entry_processo = tk.Entry(self, bg='#33425c', fg='orange', width=56, font='Arial 10')
         self.entry_processo.grid(row=13, columnspan=6)
         self.entry_processo.bind('<Escape>', self.exit)  # com um Esc encera o programa
         tk.Button(self, style_button , text='Gera link para outro processo', command=self.link_processo).grid(row=14,
@@ -101,7 +101,7 @@ class Application(tk.Frame):
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=24, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Text de sáida - parent = raiz
-        self.texto_saida = tk.Text(self.master, width=65, height=8,  bg='#33425c', fg='orange', font='Courier 9')
+        self.texto_saida = tk.Text(self.master, width=56, height=8,  bg='#33425c', fg='orange', font='Courier 9')
         self.texto_saida.pack()
         self.texto_saida.bind('<Escape>', self.exit)  # com um Esc encera o programa
         self.texto_saida.focus()
@@ -113,13 +113,13 @@ class Application(tk.Frame):
         self.master.title('e-Processo')
         self.master.configure(bg='gray')
         # dimensões da janela
-        largura = 480
+        largura = 436
         altura = 760
         # resolução da tela
         largura_screen = self.master.winfo_screenwidth()
         altura_screen = self.master.winfo_screenheight()
         # posição da janela
-        posx = largura_screen / 2 - largura / 2  # meio da tela
+        posx = 7 * largura_screen / 8 - largura / 2  # meio da tela
         posy = altura_screen / 2 - altura / 2  # meio da primeira tela
         self.master.geometry('%dx%d+%d+%d' % (largura, altura, posx, posy))  # dimensões + posição inicial
 
