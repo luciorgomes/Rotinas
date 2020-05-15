@@ -21,7 +21,7 @@ def janela_texto(titulo='', label='', texto=''):
     label_topo = tk.Label(root,text=label, width=140, bg='gray', fg='black', anchor='w')
     label_topo.pack()
 
-    text = tk.Text(root, background='#125487',foreground='orange', font = 'Mono 10')
+    text = tk.Text(root, background='#125487',foreground='orange', font = 'Mono 10', wrap=tk.WORD)
     text.insert('insert', texto)
     text['width'] = 140
     text['height'] = 43

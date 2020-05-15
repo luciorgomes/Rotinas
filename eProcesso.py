@@ -50,7 +50,8 @@ class Application(tk.Frame):
                                         exportselection=0)
         self.combo_color.grid(row=2, column=2)
         self.combo_color.set('Normal')
-        self.texto_nota = tk.Text(self, width=65, height=5, bg='#33425c', fg='orange', font='Arial 10') #bg original ='#125487'
+        self.texto_nota = tk.Text(self, width=65, height=5, bg='#33425c', fg='orange', font='Arial 10',
+                                  wrap=tk.WORD) #bg original ='#125487'
         self.texto_nota.grid(row=3, columnspan=6)
         self.texto_nota.insert(
             tk.INSERT,'Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM.')
@@ -101,7 +102,8 @@ class Application(tk.Frame):
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=24, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Text de sáida - parent = raiz
-        self.texto_saida = tk.Text(self.master, width=65, height=8,  bg='#33425c', fg='orange', font='Courier 9')
+        self.texto_saida = tk.Text(self.master, width=65, height=8,  bg='#33425c', fg='orange', font='Courier 9',
+                                   wrap=tk.WORD)
         self.texto_saida.pack()
         self.texto_saida.bind('<Escape>', self.exit)  # com um Esc encera o programa
         self.texto_saida.focus()
