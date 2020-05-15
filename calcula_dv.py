@@ -33,7 +33,8 @@ class Application(tk.Frame):
         self.proc_00 = tk.Radiobutton(self, bg='gray', fg='black', variable = self.radio_var, text='/00-', value=2)
         self.proc_00.grid(row=3, column=2)
 
-        self.texto_saida = tk.Text(self, width=32, height=10,  bg='#33425c', fg='orange', font='Courier 9')
+        self.texto_saida = tk.Text(self, width=32, height=10,  bg='#33425c', fg='orange', font='Courier 9',
+                                   wrap=tk.WORD)
         self.texto_saida.grid(row=4, columnspan=3)
         self.texto_saida.insert(tk.INSERT,'Informe o NI ou processo e \ntecle <Enter>\n\n')
         self.entry_cpf.bind('<Return>', self.calcula_cpf)
