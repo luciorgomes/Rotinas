@@ -121,7 +121,7 @@ class Application(tk.Frame):
         largura_screen = self.master.winfo_screenwidth()
         altura_screen = self.master.winfo_screenheight()
         # posição da janela
-        posx = largura_screen / 2 - largura / 2  # meio da tela
+        posx = 5 * largura_screen / 6 - largura / 2  # direita da tela
         posy = altura_screen / 2 - altura / 2  # meio da primeira tela
         self.master.geometry('%dx%d+%d+%d' % (largura, altura, posx, posy))  # dimensões + posição inicial
 
