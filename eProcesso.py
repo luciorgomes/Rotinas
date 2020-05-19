@@ -232,9 +232,15 @@ class Application(tk.Frame):
             mem = mem.split(',')
         else:
             mem = mem.split()
+        saída = ''
         for processo in mem:
-            webbrowser.open(f'https://eprocesso.suiterfb.receita.fazenda/ControleVisualizacaoProcesso.asp?psAcao=exibir&psNumeroProcesso={processo}')
-            time.sleep(0.5)
+            if processo.isnumeric():
+                webbrowser.open(f'https://eprocesso.suiterfb.receita.fazenda/ControleVisualizacaoProcesso.asp?psAcao=exibir&psNumeroProcesso={processo}')
+                time.sleep(0.5)
+                saída += processo + '\n'
+        self.texto_saida.insert(tk.INSERT, f'Processo(s) aberto(s):\n{saída}\n')
+        self.texto_saida.see(tk.END)
+
 
 def e_processo():
     '''busca arquivos de valor maior ou igual a um valor dado em um diretório'''
