@@ -106,7 +106,7 @@ class Application(tk.Frame):
                                    wrap=tk.WORD)
         self.texto_saida.pack()
         self.texto_saida.bind('<Escape>', self.exit)  # com um Esc encera o programa
-        self.texto_saida.focus()
+        self.texto_nota.focus()
         self.define_raiz()
 
     def define_raiz(self):
