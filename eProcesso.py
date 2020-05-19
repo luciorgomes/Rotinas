@@ -27,10 +27,12 @@ class Application(tk.Frame):
         style.configure('BW.TButton', foreground='#bfbfbf', background='black', highlightbackground='black',
                        width=51, font='Helvetica 11')
         style.configure('BG.TCheckbutton', selectcolor='#818181', foreground="black", background="gray"
-                        , bd=2, width=11, anchor='w')
+                        , bd=2, width=10, anchor='w')
         style.configure('Combo.TCombobox', foreground="black", background="gray", bordercolor='black')
-        style_button = {'width': 56, 'bg': '#31363b', 'fg': 'white', 'font': 'Helvetica 10',
+        style_button = {'width': 45, 'bg': '#31363b', 'fg': 'white', 'font': 'Helvetica 10',
                         'highlightbackground': 'black'}
+        style_entry = {'bg': '#33425c', 'fg': 'orange', 'width': 55, 'font': 'Arial 10'}
+
         self.configure(bg='gray')
 
         # widgets
@@ -50,7 +52,7 @@ class Application(tk.Frame):
                                         exportselection=0)
         self.combo_color.grid(row=2, column=2)
         self.combo_color.set('Normal')
-        self.texto_nota = tk.Text(self, width=65, height=5, bg='#33425c', fg='orange', font='Arial 10',
+        self.texto_nota = tk.Text(self, width=55, height=5, bg='#33425c', fg='orange', font='Arial 10',
                                   wrap=tk.WORD) #bg original ='#125487'
         self.texto_nota.grid(row=3, columnspan=6)
         self.texto_nota.insert(
@@ -63,7 +65,7 @@ class Application(tk.Frame):
         # Inclui url
         ttk.Label(self, text='Inclui link (url) em nota', style='Title.TLabel').grid(row=6, column=0, columnspan=6)
         ttk.Label(self, text='Link:', style='BG.TLabel').grid(row=7, column=0, sticky='w')
-        self.entry_link = tk.Entry(self, bg='#33425c', fg='orange', width=65, font='Arial 10')
+        self.entry_link = tk.Entry(self, style_entry)
         self.entry_link.grid(row=8, columnspan=6)
         self.entry_link.insert(0, 'http://receita.economia.gov.br/')
         self.entry_link.bind('<Escape>', self.exit)  # com um Esc encera o programa
@@ -75,7 +77,7 @@ class Application(tk.Frame):
         self.label_titulo_3 = ttk.Label(self, text='Inclui link para outro processo em nota',
                                         style='Title.TLabel').grid(row=11, columnspan=6)
         ttk.Label(self, text='Processo:', style='BG.TLabel').grid(row=12, column=0, sticky='w')
-        self.entry_processo = tk.Entry(self, bg='#33425c', fg='orange', width=65, font='Arial 10')
+        self.entry_processo = tk.Entry(self, style_entry)
         self.entry_processo.grid(row=13, columnspan=6)
         self.entry_processo.bind('<Escape>', self.exit)  # com um Esc encera o programa
         tk.Button(self, style_button , text='Gera link para outro processo', command=self.link_processo).grid(row=14,
@@ -102,11 +104,11 @@ class Application(tk.Frame):
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=24, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Text de sáida - parent = raiz
-        self.texto_saida = tk.Text(self.master, width=65, height=8,  bg='#33425c', fg='orange', font='Courier 9',
+        self.texto_saida = tk.Text(self.master, width=55, height=8,  bg='#33425c', fg='orange', font='Courier 9',
                                    wrap=tk.WORD)
         self.texto_saida.pack()
         self.texto_saida.bind('<Escape>', self.exit)  # com um Esc encera o programa
-        self.texto_saida.focus()
+        self.texto_nota.focus()
         self.define_raiz()
 
     def define_raiz(self):
@@ -115,7 +117,7 @@ class Application(tk.Frame):
         self.master.title('e-Processo')
         self.master.configure(bg='gray')
         # dimensões da janela
-        largura = 480
+        largura = 420
         altura = 760
         # resolução da tela
         largura_screen = self.master.winfo_screenwidth()
