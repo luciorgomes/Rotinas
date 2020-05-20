@@ -31,7 +31,7 @@ class App:
                         'Abre endereço no Maps', 'Google RFB','Concaternar arquivos pdf', 'Converte csv para xslx',
                         'Converte xlsx para csv', 'Busca arquivos grandes', 'Salva e recupera texto do clipboard',
                         'Transpõe xlsx (linhas x colunas)', 'e-Processo', 'Cálculo de dígitos verificadores',
-                        'Busca arquivos por extensão']
+                        'Busca arquivos por extensão', 'Concatenar planilhas']
         self.choices = sorted(self.choices)
         self.define_raiz()
         self.create_widgets()
@@ -125,6 +125,10 @@ class App:
             print('Executando busca_arquivos_extensao')
             import busca_arquivos_extensao
             busca_arquivos_extensao.busca_arquivos_extensao()
+        elif choice == 'Concatena planilhas':
+            print('Executando concatena_planilhas')
+            import concatena_planilhas
+            concatena_planilhas.concatena_planilhas()
 
     def choice_select(self, event):
         '''Recupera o item selecionado no Listbox e chama o método chama_rotina()'''
