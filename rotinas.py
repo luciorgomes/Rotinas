@@ -125,7 +125,7 @@ class App:
             print('Executando busca_arquivos_extensao')
             import busca_arquivos_extensao
             busca_arquivos_extensao.busca_arquivos_extensao()
-        elif choice == 'Concatena planilhas':
+        elif choice == 'Concatenar planilhas':
             print('Executando concatena_planilhas')
             import concatena_planilhas
             concatena_planilhas.concatena_planilhas()
