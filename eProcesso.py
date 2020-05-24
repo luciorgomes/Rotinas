@@ -1,7 +1,6 @@
 #! /usr/bin/python3
 # eProcesso.py - Funções relacionadas ao e-Processo.
 
-
 import pyperclip  # manipulação de arquivos binários, clipboard e leitura de linha de comando
 import tkinter as tk
 import tkinter.ttk as ttk
@@ -9,7 +8,6 @@ import ToolTip as tt
 import webbrowser
 import time
 import re
-
 
 
 class Application(tk.Frame):
@@ -156,13 +154,13 @@ class Application(tk.Frame):
         prefixo = ''
         sufixo = ''
 
-        if self.valor_negrito.get() == 1:
+        if self.valor_negrito.get():
             prefixo += '<b>'
             sufixo += '</b>'
-        if self.valor_italico.get() == 1:
+        if self.valor_italico.get():
             prefixo += '<i>'
             sufixo += '</i>'
-        if self.valor_sublinhado.get() == 1:
+        if self.valor_sublinhado.get():
             prefixo += '<u>'
             sufixo += '</u>'
 
@@ -262,7 +260,6 @@ class Application(tk.Frame):
                 saída += processo + '\n'
         self.texto_saida.insert(tk.INSERT, f'Processo(s) aberto(s):\n{saída}\n')
         self.texto_saida.see(tk.END)
-
 
 def e_processo():
     '''busca arquivos de valor maior ou igual a um valor dado em um diretório'''
