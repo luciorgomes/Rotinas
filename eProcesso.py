@@ -20,7 +20,7 @@ class Application(tk.Frame):
         self.valor_sublinhado = tk.IntVar()
         self.pack()
 
-        '''cria os componentes da janela'''
+        # cria os componentes da janela
         # estilos
         style = ttk.Style()
         style.configure('Title.TLabel', foreground="black", background="gray", padding=2, font='Helvetica 11 bold')
