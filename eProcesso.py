@@ -8,6 +8,8 @@ import tkinter.ttk as ttk
 import ToolTip as tt
 import webbrowser
 import time
+import re
+
 
 
 class Application(tk.Frame):
@@ -95,7 +97,7 @@ class Application(tk.Frame):
         self.bt_transp_procs = tk.Button(self, style_button , text='Gera relação transposta',
                                          command=self.transpoe_clipboard)
         self.bt_transp_procs.grid(row=17, column=0, columnspan=6)
-        tt.ToolTip(self.bt_transp_procs, f'Transpõe a relação de processos copiados para o clipboard para serem colados'
+        tt.ToolTip(self.bt_transp_procs, f'Transpõe a relação de processos copiados na memória para serem colados'
                                          f' no e-Processo')
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=18, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
@@ -251,6 +253,7 @@ class Application(tk.Frame):
             mem = mem.split(',')
         else:
             mem = mem.split()
+        mem = [re.sub('[-./]','',item) for item in mem] # exclui traço, ponto e barra para passar pelo isnumeric
         saída = ''
         for processo in mem:
             if processo.isnumeric():
