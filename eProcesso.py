@@ -5,6 +5,7 @@
 import pyperclip  # manipulação de arquivos binários, clipboard e leitura de linha de comando
 import tkinter as tk
 import tkinter.ttk as ttk
+import ToolTip as tt
 import webbrowser
 import time
 
@@ -58,8 +59,9 @@ class Application(tk.Frame):
         self.texto_nota.insert(
             tk.INSERT,'Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM.')
         self.texto_nota.bind('<Escape>', self.exit)  # com um Esc encera o programa
-        tk.Button(self, style_button, text='Gera nota formatada', command=self.formata_texto_nota).grid(
-            row=4, column=0, columnspan=6)
+        self.bt_gera_nota = tk.Button(self, style_button, text='Gera nota formatada', command=self.formata_texto_nota)
+        self.bt_gera_nota.grid(row=4, column=0, columnspan=6)
+        tt.ToolTip(self.bt_gera_nota, 'Gera nota com o texto acima formatado conforme as seleções de estilo e cor')
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=5, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Inclui url
@@ -69,8 +71,9 @@ class Application(tk.Frame):
         self.entry_link.grid(row=8, columnspan=6)
         self.entry_link.insert(0, 'http://receita.economia.gov.br/')
         self.entry_link.bind('<Escape>', self.exit)  # com um Esc encera o programa
-        tk.Button(self, style_button ,text='Gera link para url', command=self.link_url).grid(row=9,
-                                                                                             column=0, columnspan=6)
+        self.bt_gera_link = tk.Button(self, style_button ,text='Gera link para url', command=self.link_url)
+        self.bt_gera_link.grid(row=9, column=0, columnspan=6)
+        tt.ToolTip(self.bt_gera_link, 'Gera nota com link para a url indicada no campo acima')
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=10, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Inclui link para processo
@@ -80,27 +83,43 @@ class Application(tk.Frame):
         self.entry_processo = tk.Entry(self, style_entry)
         self.entry_processo.grid(row=13, columnspan=6)
         self.entry_processo.bind('<Escape>', self.exit)  # com um Esc encera o programa
-        tk.Button(self, style_button , text='Gera link para outro processo', command=self.link_processo).grid(row=14,
-                                                                                            column=0, columnspan=6)
+        self.bt_gera_link_proc = tk.Button(self, style_button , text='Gera link para outro processo',
+                                           command=self.link_processo)
+        self.bt_gera_link_proc.grid(row=14, column=0, columnspan=6)
+        tt.ToolTip(self.bt_gera_link_proc, 'Gera nota com link para o processo indicado no campo acima')
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=15, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Transpõe processos
         ttk.Label(self, text='Transpõe relação de processos copiados na memória',
                                         style='Title.TLabel').grid(row=16, columnspan=6)
-        tk.Button(self, style_button , text='Gera relação transposta', command=self.transpoe_clipboard).grid(row=17,
-                                                                                            column=0, columnspan=6)
+        self.bt_transp_procs = tk.Button(self, style_button , text='Gera relação transposta',
+                                         command=self.transpoe_clipboard)
+        self.bt_transp_procs.grid(row=17, column=0, columnspan=6)
+        tt.ToolTip(self.bt_transp_procs, f'Transpõe a relação de processos copiados para o clipboard para serem colados'
+                                         f' no e-Processo')
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=18, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Abre funcionalidades
         ttk.Label(self, text='Abre funções / processos',style='Title.TLabel').grid(row=19, columnspan=6)
-        tk.Button(self, style_button ,text='Abre Caixa de Trabalho', command=self.abre_caixa_trabalho).grid(row=20,
-                                                                                                column=0, columnspan=6)
-        tk.Button(self, style_button, text='Abre Gerencial de Estoque',
-                  command=self.abre_gerencial_estoque).grid(row=21, column=0, columnspan=6)
-        tk.Button(self, style_button, text='Abre Consulta',
-                  command=self.abre_consulta).grid(row=22, column=0, columnspan=6)
-        tk.Button(self, style_button, text='Abre processos da área de transferência (clipboard)',
-                  command=self.abre_processos).grid(row=23, column=0, columnspan=6)
+        self.bt_abre_cx_trab = tk.Button(self, style_button ,text='Abre Caixa de Trabalho',
+                                         command=self.abre_caixa_trabalho)
+        self.bt_abre_cx_trab.grid(row=20, column=0, columnspan=6)
+        tt.ToolTip(self.bt_abre_cx_trab, 'Abre a caixa de trabalho de equipe no e-Processo')
+
+        self.bt_abre_ger = tk.Button(self, style_button, text='Abre Gerencial de Estoque',
+                  command=self.abre_gerencial_estoque)
+        self.bt_abre_ger.grid(row=21, column=0, columnspan=6)
+        tt.ToolTip(self.bt_abre_ger, 'Abre o gerencial de estoque de processos do e-Processo')
+
+        self.bt_abre_consulta = tk.Button(self, style_button, text='Abre Consulta',
+                  command=self.abre_consulta)
+        self.bt_abre_consulta.grid(row=22, column=0, columnspan=6)
+        tt.ToolTip(self.bt_abre_consulta, 'Abre a consulta de processos do e-Processo')
+
+        self.bt_abre_procs = tk.Button(self, style_button, text='Abre processos da área de transferência (clipboard)',
+                  command=self.abre_processos)
+        self.bt_abre_procs.grid(row=23, column=0, columnspan=6)
+        tt.ToolTip(self.bt_abre_procs, 'Abre os processos os copiados na memória no e-Processo')
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=24, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Text de sáida - parent = raiz

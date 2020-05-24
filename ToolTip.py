@@ -15,8 +15,8 @@ class ToolTip(object):
 
     def show_tooltip(self):
         if self.tip_text: # se recebrr um texto...
-            x_left = self.widget.winfo_rootx() # recebe a coordenada x do topo do widget
-            y_top = self.widget.winfo_rooty() - 18 # recebe a coordenada x do topo do widget e subtrai 18 para que apareça acima dele
+            x_left = self.widget.winfo_rootx()  # recebe a coordenada x do topo do widget
+            y_top = self.widget.winfo_rooty() - 25 # recebe a coordenada x do topo do widget e subtrai 25 para que apareça acima dele
             self.tip_window = tk.Toplevel(self.widget) # cria a janela
             self.tip_window.overrideredirect(True)  # remove a toolbar da janela criada
             self.tip_window.geometry('+%d+%d'% (x_left, y_top)) # posiciona a jenela do tooptip
