@@ -247,11 +247,11 @@ class Application(tk.Frame):
 
     def abre_processos(self, event=None):
         mem = pyperclip.paste()
-        if ',' in mem:
+        if ',' in mem: # se processos concatenados separados por vírgula
             mem = mem.split(',')
         else:
             mem = mem.split()
-        mem = [re.sub('[-./]','',item) for item in mem] # exclui traço, ponto e barra para passar pelo isnumeric
+        mem = [re.sub('[-./]', '', item) for item in mem] # exclui traço, ponto e barra para passar pelo isnumeric
         saída = ''
         for processo in mem:
             if processo.isnumeric():
