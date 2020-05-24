@@ -97,7 +97,7 @@ class Application(tk.Frame):
         self.bt_transp_procs = tk.Button(self, style_button , text='Gera relação transposta',
                                          command=self.transpoe_clipboard)
         self.bt_transp_procs.grid(row=17, column=0, columnspan=6)
-        tt.ToolTip(self.bt_transp_procs, f'Transpõe a relação de processos copiados na memória para serem colados'
+        tt.ToolTip(self.bt_transp_procs, f'Transpõe a relação de processos copiados na memória para ser colada'
                                          f' no e-Processo')
         ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=18, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 

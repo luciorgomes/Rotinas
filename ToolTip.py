@@ -21,7 +21,7 @@ class ToolTip(object):
             self.tip_window.overrideredirect(True)  # remove a toolbar da janela criada
             self.tip_window.geometry('+%d+%d'% (x_left, y_top)) # posiciona a jenela do tooptip
             label = tk.Label(self.tip_window, text=self.tip_text, justify=tk.LEFT,  # label inserido na janela do Tooptip
-            background="white", relief=tk.SOLID, borderwidth=1, font=("tahoma", '8', 'normal'), fg='black')
+            background="#ffffe0", relief=tk.SOLID, borderwidth=1, font=("tahoma", '8', 'normal'), fg='black')
             label.pack(ipadx=1) # torna o label visível
     
     def hide_tootip(self):
