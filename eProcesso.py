@@ -31,7 +31,7 @@ class Application(tk.Frame):
                         , bd=2, width=10, anchor='w')
         style.configure('Combo.TCombobox', foreground="black", background="gray", bordercolor='black')
         style_button = {'width': 45, 'bg': '#31363b', 'fg': 'white', 'font': 'Helvetica 10',
-                        'highlightbackground': 'black'}
+                        'highlightbackground': 'black', 'cursor': 'hand2'}
         style_entry = {'bg': '#33425c', 'fg': 'orange', 'width': 55, 'font': 'Arial 10'}
 
         self.configure(bg='gray')
