@@ -217,8 +217,7 @@ class Application(tk.Frame):
             self.texto_saida.see(tk.END)
         else:
             proc_filtered = ''.join(i for i in processo if i.isdigit())  # desconsidera tudo o que não for texto
-            processo_link = f'<a href="https://eprocesso.suiterfb.receita.fazenda/ControleVisualizacaoProcesso.asp?psAcao=exibir&psNumeroProcesso=\
-                {proc_filtered} " target = "_blank" title = "{proc_filtered} ">{proc_filtered} </a>'
+            processo_link = f'<a href="https://eprocesso.suiterfb.receita.fazenda/ControleVisualizacaoProcesso.asp?psAcao=exibir&psNumeroProcesso={proc_filtered} " target = "_blank" title = "{proc_filtered} ">{proc_filtered} </a>'
             pyperclip.copy(processo_link)
             print('Texto do link copiado para a memória (cole com Ctrl+v)')
             self.texto_saida.insert(tk.INSERT, processo_link +

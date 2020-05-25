@@ -139,7 +139,8 @@ class App:
     def create_widgets(self):
         '''Cria o Listbox e inclui os itens da lista self.choices'''
         self.list_box = Listbox(self.root, width=500, height=500, bg='#31363b', fg='#eff0f1',
-                                highlightbackground='#125487',selectbackground='#125487',selectforeground='orange')
+                                highlightbackground='#125487',selectbackground='#125487',selectforeground='orange',
+                                font='Helvetica 10')
         self.list_box.pack()
         for item in self.choices:
             self.list_box.insert(END, item)
