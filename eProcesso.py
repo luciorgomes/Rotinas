@@ -23,8 +23,8 @@ class Application(tk.Frame):
         # cria os componentes da janela
         # estilos
         style = ttk.Style()
-        style.configure('Title.TLabel', foreground="black", background="gray", padding=2, font='Helvetica 11 bold')
-        style.configure('BG.TLabel', foreground="black", background="gray", padding=2)
+        style.configure('Title.TLabel', foreground="black", background="gray", padding=1, font='Helvetica 11 bold')
+        style.configure('BG.TLabel', foreground="black", background="gray", padding=1)
         style.configure('BW.TButton', foreground='#bfbfbf', background='black', highlightbackground='black',
                        width=51, font='Helvetica 11')
         style.configure('BG.TCheckbutton', selectcolor='#818181', foreground="black", background="gray"
@@ -106,21 +106,26 @@ class Application(tk.Frame):
         self.bt_abre_cx_trab.grid(row=20, column=0, columnspan=6)
         tt.ToolTip(self.bt_abre_cx_trab, 'Abre a caixa de trabalho de equipe no e-Processo')
 
+        self.bt_abre_cx_trab_antiga = tk.Button(self, style_button ,text='Abre Caixa de Trabalho antiga',
+                                         command=self.abre_caixa_trabalho_antiga)
+        self.bt_abre_cx_trab_antiga.grid(row=21, column=0, columnspan=6)
+        tt.ToolTip(self.bt_abre_cx_trab_antiga, 'Abre a caixa de trabalho de equipe antiga no e-Processo')
+
         self.bt_abre_ger = tk.Button(self, style_button, text='Abre Gerencial de Estoque',
                   command=self.abre_gerencial_estoque)
-        self.bt_abre_ger.grid(row=21, column=0, columnspan=6)
+        self.bt_abre_ger.grid(row=22, column=0, columnspan=6)
         tt.ToolTip(self.bt_abre_ger, 'Abre o gerencial de estoque de processos do e-Processo')
 
         self.bt_abre_consulta = tk.Button(self, style_button, text='Abre Consulta',
                   command=self.abre_consulta)
-        self.bt_abre_consulta.grid(row=22, column=0, columnspan=6)
+        self.bt_abre_consulta.grid(row=23, column=0, columnspan=6)
         tt.ToolTip(self.bt_abre_consulta, 'Abre a consulta de processos do e-Processo')
 
         self.bt_abre_procs = tk.Button(self, style_button, text='Abre processos da área de transferência (clipboard)',
                   command=self.abre_processos)
-        self.bt_abre_procs.grid(row=23, column=0, columnspan=6)
+        self.bt_abre_procs.grid(row=24, column=0, columnspan=6)
         tt.ToolTip(self.bt_abre_procs, 'Abre os processos os copiados na memória no e-Processo')
-        ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=24, columnspan=6, padx=10, pady=5, sticky=tk.EW)
+        ttk.Separator(self, orient=tk.HORIZONTAL).grid(row=25, columnspan=6, padx=10, pady=5, sticky=tk.EW)
 
         # Text de sáida - parent = raiz
         self.texto_saida = tk.Text(self.master, width=55, height=8,  bg='#33425c', fg='orange', font='Courier 9',
@@ -137,7 +142,7 @@ class Application(tk.Frame):
         self.master.configure(bg='gray')
         # dimensões da janela
         largura = 420
-        altura = 760
+        altura = 790
         # resolução da tela
         largura_screen = self.master.winfo_screenwidth()
         altura_screen = self.master.winfo_screenheight()
@@ -236,6 +241,9 @@ class Application(tk.Frame):
         self.texto_saida.see(tk.END)
 
     def abre_caixa_trabalho(self, event=None):
+        webbrowser.open('https://eprocesso.suiterfb.receita.fazenda/eprocesso/index.html#/ngx/caixa-trabalho-equipe')
+
+    def abre_caixa_trabalho_antiga(self, event=None):
         webbrowser.open('https://eprocesso.suiterfb.receita.fazenda/ControleAcessarCaixaTrabalho.asp?psAcao=apresentarPagina&psLimpaEquipe=1')
 
     def abre_gerencial_estoque(self, event=None):
