@@ -46,13 +46,6 @@ class Application(tk.Frame):
         ##33425c
         self.define_raiz()
 
-    def define_arquivo(self, event=None):
-        '''chama o filedialog do Tkinter para definir o diretório'''
-        self.file = filedialog.askopenfilename(initialdir = "/",title = "Selecione arquivo csv", filetypes=[("Csv files", ".csv")])
-        if self.file is not None:  # Se não foi cancelado
-            self.entry_dir.delete(0, 'end')
-            self.entry_dir.insert(0, self.file)
-
     def define_raiz(self):
         '''Define caracterísicas da janela'''
         self.master.title('Limpa caracteres de arquivo csv')
@@ -69,6 +62,13 @@ class Application(tk.Frame):
         posy = altura_screen / 2 - altura / 2  # meio da primeira tela
         self.master.geometry('%dx%d+%d+%d' % (largura, altura, posx, posy))  # dimensões + posição inicial
 
+    def define_arquivo(self, event=None):
+        '''chama o filedialog do Tkinter para definir o arquivo'''
+        self.file = filedialog.askopenfilename(initialdir = "/",title = "Selecione arquivo csv", filetypes=[("Csv files", ".csv")])
+        if self.file is not None:  # Se não foi cancelado
+            self.entry_dir.delete(0, 'end')
+            self.entry_dir.insert(0, self.file)
+
     def testa_e_executa(self,event=None):
         '''verifica a validade dos parâmetros e chama o método de busca de arquivos'''
         self.folder = os.path.dirname(self.entry_dir.get())
@@ -82,6 +82,7 @@ class Application(tk.Frame):
         self.master.destroy()
 
     def processa_arquivo_csv(self):
+        '''processa o arquivo csv e gera um segundo com o resultado do processamento'''
         self.texto_saida['text'] = ''
         with open(self.file, errors='ignore') as csv_file_object:
             self.texto_saida['text'] = 'Abrindo arquivo .csv...'
