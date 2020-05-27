@@ -400,15 +400,13 @@ class Application(tk.Frame):
             mem = mem.split(",")
         else:
             mem = mem.split()
-        mem = [
-            re.sub("[-./]", "", item) for item in mem
-        ]  # exclui traço, ponto e barra para passar pelo isnumeric
+        # exclui traço, ponto e barra para passar pelo isnumeric
+        mem = [re.sub("[-./]", "", item) for item in mem]
         saída = ""
         for processo in mem:
             if processo.isnumeric():
                 webbrowser.open(
-                    f"https://eprocesso.suiterfb.receita.fazenda/ControleVisualizacaoProcesso.asp?psAcao=exibir&psNumeroProcesso={processo}"
-                )
+                    f"https://eprocesso.suiterfb.receita.fazenda/ControleVisualizacaoProcesso.asp?psAcao=exibir&psNumeroProcesso={processo}")
                 time.sleep(0.5)
                 saída += processo + "\n"
         self.texto_saida.insert(
