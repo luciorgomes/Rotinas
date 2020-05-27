@@ -31,7 +31,8 @@ class App:
                         'Abre endereço no Maps', 'Google RFB','Concaternar arquivos pdf', 'Converte csv para xslx',
                         'Converte xlsx para csv', 'Busca arquivos grandes', 'Salva e recupera texto do clipboard',
                         'Transpõe xlsx (linhas x colunas)', 'e-Processo', 'Cálculo de dígitos verificadores',
-                        'Busca arquivos por extensão', 'Concatenar planilhas excel']
+                        'Busca arquivos por extensão', 'Concatenar planilhas excel', 'Limpa caracteres de arquivo csv'
+                        ]
         self.choices = sorted(self.choices)
         self.define_raiz()
         self.create_widgets()
@@ -129,6 +130,10 @@ class App:
             print('Executando concatena_planilhas')
             import concatena_planilhas_excel
             concatena_planilhas_excel.concatena_planilhas_excel()
+        elif choice == 'Limpa caracteres de arquivo csv':
+            print('Executando limpa_caracteres_csv')
+            import limpa_caracteres_csv
+            limpa_caracteres_csv.limpa_caracteres_csv()
 
     def choice_select(self, event):
         '''Recupera o item selecionado no Listbox e chama o método chama_rotina()'''

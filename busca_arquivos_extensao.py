@@ -17,49 +17,59 @@ class Application(tk.Frame):
         super().__init__(master)
         self.master = master
         self.icon = tk.PhotoImage(file='./image/Folder-icon.png')
-        self.master.iconphoto(False, tk.PhotoImage(file='./image/Python-icon.png'))
+        self.master.iconphoto(False, tk.PhotoImage(
+            file='./image/Python-icon.png'))
         self.check_var = tk.IntVar()
         self.copia_var = tk.IntVar()
         self.pack()
 
         '''cria os componentes da janela'''
-        tk.Label(self, text='Diretório:', bg= 'gray', fg='black').grid(row=0, column=0, sticky='e', ipady=3)
-        self.entry_dir = tk.Entry(self, bg='#125487', fg= 'orange', width=45)
+        tk.Label(self, text='Diretório:', bg='gray', fg='black').grid(
+            row=0, column=0, sticky='e', ipady=3)
+        self.entry_dir = tk.Entry(self, bg='#125487', fg='orange', width=45)
         self.entry_dir.grid(row=0, column=1, columnspan=2)
-        self.entry_dir.insert(0, os.path.expanduser('~')) # home directory
+        self.entry_dir.insert(0, os.path.expanduser('~'))  # home directory
         self.button_dir = tk.Button(self, text='>', image=self.icon, bg='#31363b', fg='white',
                                     command=self.define_diretorio_busca)
         self.button_dir.grid(row=0, column=3, sticky='e')
-        self.button_dir.bind('<Escape>', self.exit)  # com um Esc encera o programa
+        # com um Esc encera o programa
+        self.button_dir.bind('<Escape>', self.exit)
         # self.button_dir.bind('<Return>',self.define_diretorio)
         self.subdiretorios = tk.Checkbutton(self, text='Incluir subdiretórios', variable=self.check_var,
-                                            bg='gray', fg='black',borderwidth=0)
+                                            bg='gray', fg='black', borderwidth=0)
         self.subdiretorios.grid(row=1, column=1, columnspan=2)
         self.subdiretorios.select()
 
-        tk.Label(self, text='Extensão:', bg= 'gray', fg='black').grid(row=2, column=0, sticky='e', ipady=3)
+        tk.Label(self, text='Extensão:', bg='gray', fg='black').grid(
+            row=2, column=0, sticky='e', ipady=3)
 
-        self.entry_extensao = tk.Entry(self, bg='#125487', fg='orange', width=45)
+        self.entry_extensao = tk.Entry(
+            self, bg='#125487', fg='orange', width=45)
         self.entry_extensao.insert(0, 'pdf')
         self.entry_extensao.grid(row=2, column=1, columnspan=2)
 
-        tk.Label(self, text='Destino:', bg='gray', fg='black').grid(row=3, column=0, sticky='e', ipady=3)
-        self.entry_destino = tk.Entry(self, bg='#125487', fg='orange', width=45)
+        tk.Label(self, text='Destino:', bg='gray', fg='black').grid(
+            row=3, column=0, sticky='e', ipady=3)
+        self.entry_destino = tk.Entry(
+            self, bg='#125487', fg='orange', width=45)
         self.entry_destino.grid(row=3, column=1, columnspan=2)
-        self.entry_destino.insert(0, os.path.expanduser('~')) # home directory
+        self.entry_destino.insert(0, os.path.expanduser('~'))  # home directory
         self.button_destino = tk.Button(self, text='>', image=self.icon, bg='#31363b', fg='white',
-                                    command=self.define_diretorio_destino)
+                                        command=self.define_diretorio_destino)
         self.button_destino.grid(row=3, column=3, sticky='e')
-        self.button_destino.bind('<Escape>', self.exit)  # com um Esc encera o programa
+        # com um Esc encera o programa
+        self.button_destino.bind('<Escape>', self.exit)
         # self.button_destino.bind('<Return>',self.define_diretorio)
 
-        self.copia = tk.Checkbutton(self, bg='gray', fg='black', variable = self.copia_var, text='Copiar Arquivos')
+        self.copia = tk.Checkbutton(
+            self, bg='gray', fg='black', variable=self.copia_var, text='Copiar Arquivos')
         self.copia.grid(row=4, column=1, columnspan=2)
         self.copia.deselect()
         self.copia.bind("<ButtonRelease-1>", self.alerta_copia)
 
         # botão fora do Frame
-        tk.Button(self.master, text='Executar', bg='#31363b', fg='white',command=self.run).pack()
+        tk.Button(self.master, text='Executar', bg='#31363b',
+                  fg='white', command=self.run).pack()
 
         self.button_dir.focus()
 
@@ -78,7 +88,8 @@ class Application(tk.Frame):
         # posição da janela
         posx = largura_screen / 2 - largura / 2  # meio da tela
         posy = altura_screen / 4 - altura / 2  # meio da primeira tela
-        self.master.geometry('%dx%d+%d+%d' % (largura, altura, posx, posy))  # dimensões + posição inicial
+        # dimensões + posição inicial
+        self.master.geometry('%dx%d+%d+%d' % (largura, altura, posx, posy))
         self.configure(bg='gray')
 
     def define_diretorio_busca(self, event=None):
@@ -106,7 +117,6 @@ class Application(tk.Frame):
             self.copia['text'] = 'Copiar Arquivos'
             self.copia['fg'] = 'black'
 
-
     def exit(self, event=None):
         self.master.destroy()
 
@@ -116,22 +126,24 @@ class Application(tk.Frame):
         erro_destino = 'n'
         folder = self.entry_dir.get()
         try:
-            os.chdir(folder)  # altera o diretório de trabalho para a pasta 'folder'
+            # altera o diretório de trabalho para a pasta 'folder'
+            os.chdir(folder)
         except FileNotFoundError:
             print("Diretório inválido!")
             erro_folder = 's'
         destino = self.entry_destino.get()
         try:
-            os.chdir(destino)  # altera o diretório de trabalho para a pasta 'folder'
+            # altera o diretório de trabalho para a pasta 'folder'
+            os.chdir(destino)
         except FileNotFoundError:
             print("Diretório inválido!")
             erro_destino = 's'
         return erro_folder == 'n' and erro_destino == 'n'
-            # self.busca_arquivos_grandes()
+        # self.busca_arquivos_grandes()
 
     def run(self):
         if not self.testa_diretorios():
-            messagebox.showerror('Erro!','Verifique os diretórios informados' )
+            messagebox.showerror('Erro!', 'Verifique os diretórios informados')
             return
         folder = self.entry_dir.get()
         extension = self.entry_extensao.get()
@@ -155,13 +167,16 @@ class Application(tk.Frame):
                     # Copia os arquivos dessa pasta ao destino informado.
                     for filename in filenames:
                         if filename.endswith('.' + extension) and foldername != new_folder:
-                            print('Encontrado ' + filename + ', registrando em ' + file.name)
-                            if copia_arquivos == 1: # gera a relação e copia os arquivos
+                            print('Encontrado ' + filename +
+                                  ', registrando em ' + file.name)
+                            if copia_arquivos == 1:  # gera a relação e copia os arquivos
                                 try:
-                                    shutil.copy(os.path.join(foldername, filename), new_folder)
+                                    shutil.copy(os.path.join(
+                                        foldername, filename), new_folder)
                                 except shutil.SameFileError:
                                     continue
-                            file_path = os.path.join(foldername, filename) + '\n'
+                            file_path = os.path.join(
+                                foldername, filename) + '\n'
                             try:
                                 file.write(file_path)
                             except UnicodeEncodeError:
@@ -170,7 +185,8 @@ class Application(tk.Frame):
                             finded += 1
                 file.write('Finded ' + str(finded) + ' files.')
                 texto_saída += 'Finded ' + str(finded) + ' files.'
-            jt.janela_texto('Busca arquivos por extensão - Resultado', 'Saída', texto_saída)
+            jt.janela_texto(
+                'Busca arquivos por extensão - Resultado', 'Saída', texto_saída)
             print('Finded ' + str(finded) + ' files. \nDone.')
 
         else:
@@ -178,10 +194,12 @@ class Application(tk.Frame):
             with open(f'{new_folder}/relacao_por_extensao_{extension}.txt', 'w') as file:
                 for filename in os.listdir(folder):
                     if filename.endswith('.' + extension) and folder != new_folder:
-                        print('Encontrado ' + filename + ', registrando em ' + file.name)
+                        print('Encontrado ' + filename +
+                              ', registrando em ' + file.name)
                         if copia_arquivos == 1:  # gera a relação e copia os arquivos
                             try:
-                                shutil.copy(os.path.join(foldername, filename), new_folder)
+                                shutil.copy(os.path.join(
+                                    foldername, filename), new_folder)
                             except shutil.SameFileError:
                                 continue
                         file_path = os.path.join(folder, filename) + '\n'
@@ -193,7 +211,8 @@ class Application(tk.Frame):
                         finded += 1
                 file.write('Finded ' + str(finded) + ' files.')
                 texto_saída += 'Finded ' + str(finded) + ' files.'
-            jt.janela_texto('Busca arquivos por extensão - Resultado', 'Saída', texto_saída)
+            jt.janela_texto(
+                'Busca arquivos por extensão - Resultado', 'Saída', texto_saída)
             print('Finded ' + str(finded) + ' files. \nDone.')
 
 
@@ -206,4 +225,3 @@ def busca_arquivos_extensao():
 
 if __name__ == '__main__':  # executa se chamado diretamente
     busca_arquivos_extensao()
-

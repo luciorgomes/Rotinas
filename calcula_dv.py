@@ -3,6 +3,7 @@
 # da linha de comendo ou do clipboard.
 
 import tkinter as tk
+import re
 
 class Application(tk.Frame):
     '''instancia a janela de parâmetros da busca de arquivos grandes'''
@@ -45,6 +46,10 @@ class Application(tk.Frame):
         self.entry_processo.bind('<KP_Enter>', self.calcula_processo)
         self.entry_cpf.focus()
 
+    def remove_caracteres(self, entrada):
+        entrada_numerica =  re.sub("[-./]", "", entrada) # remove traço, ponto e barra
+        return entrada_numerica
+
     def define_raiz(self):
         '''Define caracterísicas da janela'''
 
@@ -63,6 +68,7 @@ class Application(tk.Frame):
 
     def calcula_cpf(self, event=None):
         entrada_cpf = self.entry_cpf.get()
+        entrada_cpf = self.remove_caracteres(entrada_cpf)
         if len(entrada_cpf) == 11 and entrada_cpf.isdecimal():
             cpf_calc = entrada_cpf[:9]
         elif len(entrada_cpf) == 9 and entrada_cpf.isdecimal():
@@ -108,6 +114,7 @@ class Application(tk.Frame):
 
     def calcula_cnpj(self, event=None):
         entrada_cnpj = self.entry_cnpj.get()
+        entrada_cnpj = self.remove_caracteres(entrada_cnpj)
         if len(entrada_cnpj) == 14 and entrada_cnpj.isdecimal():
             cnpj_calc = entrada_cnpj[:12]
         elif len(entrada_cnpj) == 12 and entrada_cnpj.isdecimal():
@@ -158,6 +165,7 @@ class Application(tk.Frame):
 
     def calcula_processo(self, event=None):
         entrada_processo = self.entry_processo.get()
+        entrada_processo = self.remove_caracteres(entrada_processo)
         radio = self.radio_var.get()
         if (len(entrada_processo) == 17 and radio == 1) or (len(entrada_processo) == 15 and radio == 2) \
                 and entrada_processo.isdecimal():
