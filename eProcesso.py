@@ -51,6 +51,7 @@ class Application(tk.Frame):
             "fg": "white",
             "font": "Helvetica 10",
             "highlightbackground": "black",
+            'cursor':'hand2'
         }
         style_entry = {"bg": "#33425c", "fg": "orange",
                        "width": 55, "font": "Arial 10"}
