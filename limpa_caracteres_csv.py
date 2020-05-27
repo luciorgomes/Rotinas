@@ -6,6 +6,7 @@ import os
 import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import filedialog
+import ToolTip as tt
 
 
 class Application(tk.Frame):
@@ -30,10 +31,12 @@ class Application(tk.Frame):
         self.button_dir.bind('<Escape>', self._exit) # com um Esc encera o programa
         self.entry_dir.bind('<Escape>', self._exit)  # com um Esc encera o programa
         self.button_dir.focus()
+        tt.ToolTip(self.button_dir, 'Clique para selecionar o arquivo csv')
         tk.Label(self, text='Separador:', bg= 'gray', fg='black').grid(row=1, column=0, columnspan=4)
         self.separador = ttk.Combobox(self, values=[',', ';'], state="readonly", width=5) 
         self.separador.current(0)
         self.separador.grid(row=2, column=0, columnspan=4)
+        tt.ToolTip(self.separador, 'Selecione o caracter separador de colunas')
         # fora do Frame
         tk.Button(self.master, text='Executar', anchor='n', bg='#31363b', fg='white',
                                     command=self.testa_e_executa).pack(pady=5)
