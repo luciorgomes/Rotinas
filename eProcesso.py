@@ -24,22 +24,12 @@ class Application(tk.Frame):
         # cria os componentes da janela
         # estilos
         style = ttk.Style()
-        style.configure(
-            "Title.TLabel",
-            foreground="black",
-            background="gray",
-            padding=2,
-            font="Helvetica 11 bold",
-        )
-        style.configure("BG.TLabel", foreground="black", background="gray", padding=2)
-        style.configure(
-            "BW.TButton",
-            foreground="#bfbfbf",
-            background="black",
-            highlightbackground="black",
-            width=51,
-            font="Helvetica 11",
-        )
+        style.configure("Title.TLabel", foreground="black",
+                        background="gray", padding=2, font="Helvetica 11 bold")
+        style.configure("BG.TLabel", foreground="black",
+                        background="gray", padding=2)
+        style.configure("BW.TButton", foreground="#bfbfbf", background="black",
+                        highlightbackground="black", width=51, font="Helvetica 11")
         style.configure(
             "BG.TCheckbutton",
             selectcolor="#818181",
@@ -62,7 +52,8 @@ class Application(tk.Frame):
             "font": "Helvetica 10",
             "highlightbackground": "black",
         }
-        style_entry = {"bg": "#33425c", "fg": "orange", "width": 55, "font": "Arial 10"}
+        style_entry = {"bg": "#33425c", "fg": "orange",
+                       "width": 55, "font": "Arial 10"}
 
         self.configure(bg="gray")
 
@@ -115,7 +106,8 @@ class Application(tk.Frame):
             tk.INSERT,
             "Solicitação formalizada indevidamente via e-Cac por meio de dossiê de Restituição de AFRMM.",
         )
-        self.texto_nota.bind("<Escape>", self.exit)  # com um Esc encera o programa
+        # com um Esc encera o programa
+        self.texto_nota.bind("<Escape>", self.exit)
         self.bt_gera_nota = tk.Button(
             self,
             style_button,
@@ -141,7 +133,8 @@ class Application(tk.Frame):
         self.entry_link = tk.Entry(self, style_entry)
         self.entry_link.grid(row=8, columnspan=6)
         self.entry_link.insert(0, "http://receita.economia.gov.br/")
-        self.entry_link.bind("<Escape>", self.exit)  # com um Esc encera o programa
+        # com um Esc encera o programa
+        self.entry_link.bind("<Escape>", self.exit)
         self.bt_gera_link = tk.Button(
             self, style_button, text="Gera link para url", command=self.link_url
         )
@@ -162,7 +155,8 @@ class Application(tk.Frame):
         )
         self.entry_processo = tk.Entry(self, style_entry)
         self.entry_processo.grid(row=13, columnspan=6)
-        self.entry_processo.bind("<Escape>", self.exit)  # com um Esc encera o programa
+        # com um Esc encera o programa
+        self.entry_processo.bind("<Escape>", self.exit)
         self.bt_gera_link_proc = tk.Button(
             self,
             style_button,
@@ -230,7 +224,8 @@ class Application(tk.Frame):
             self, style_button, text="Abre Consulta", command=self.abre_consulta
         )
         self.bt_abre_consulta.grid(row=22, column=0, columnspan=6)
-        tt.ToolTip(self.bt_abre_consulta, "Abre a consulta de processos do e-Processo")
+        tt.ToolTip(self.bt_abre_consulta,
+                   "Abre a consulta de processos do e-Processo")
 
         self.bt_abre_procs = tk.Button(
             self,
@@ -257,7 +252,8 @@ class Application(tk.Frame):
             wrap=tk.WORD,
         )
         self.texto_saida.pack()
-        self.texto_saida.bind("<Escape>", self.exit)  # com um Esc encera o programa
+        # com um Esc encera o programa
+        self.texto_saida.bind("<Escape>", self.exit)
         self.texto_nota.focus()
         self.define_raiz()
 
@@ -325,7 +321,8 @@ class Application(tk.Frame):
             print("Nota copiada para a memória (cole com Ctrl+v)")
             self.texto_saida.insert(
                 tk.INSERT,
-                saida + "\n\nNota copiada para a memória (cole com Ctrl+v)\n\n",
+                saida +
+                "\n\nNota copiada para a memória (cole com Ctrl+v)\n\n",
             )
             self.texto_saida.see(tk.END)
 
@@ -358,8 +355,7 @@ class Application(tk.Frame):
             proc_filtered = "".join(
                 i for i in processo if i.isdigit()
             )  # desconsidera tudo o que não for texto
-            processo_link = f'<a href="https://eprocesso.suiterfb.receita.fazenda/ControleVisualizacaoProcesso.asp?psAcao=exibir&psNumeroProcesso=\
-                {proc_filtered} " target = "_blank" title = "{proc_filtered} ">{proc_filtered} </a>'
+            processo_link = f'<a href="https://eprocesso.suiterfb.receita.fazenda/ControleVisualizacaoProcesso.asp?psAcao=exibir&psNumeroProcesso=\{proc_filtered} " target = "_blank" title = "{proc_filtered} ">{proc_filtered} </a>'
             pyperclip.copy(processo_link)
             print("Texto do link copiado para a memória (cole com Ctrl+v)")
             self.texto_saida.insert(
@@ -415,7 +411,8 @@ class Application(tk.Frame):
                 )
                 time.sleep(0.5)
                 saída += processo + "\n"
-        self.texto_saida.insert(tk.INSERT, f"Processo(s) aberto(s):\n{saída}\n")
+        self.texto_saida.insert(
+            tk.INSERT, f"Processo(s) aberto(s):\n{saída}\n")
         self.texto_saida.see(tk.END)
 
 
