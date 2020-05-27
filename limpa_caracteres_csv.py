@@ -76,7 +76,7 @@ class Application(tk.Frame):
             os.chdir(self.folder)  # altera o diretório de trabalho para a pasta 'folder'
             self.processa_arquivo_csv()
         except FileNotFoundError:
-            print("Diretório inválido!")
+            self.texto_saida['text'] = "Diretório inválido!"
 
     def _exit(self, event=None):
         self.master.destroy()
