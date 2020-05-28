@@ -7,6 +7,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import filedialog
 import ToolTip as tt
+import DragManager as dg
 
 
 class Application(tk.Frame):
@@ -24,6 +25,8 @@ class Application(tk.Frame):
         tk.Label(self, text='Arquivo:', bg= 'gray', fg='black').grid(row=0, column=0, sticky='e')
         self.entry_dir = tk.Entry(self, bg='#33425c', fg= 'orange', width= 45)
         self.entry_dir.grid(row=0, column=1, columnspan=2)
+        dnd = dg.DragManager() # habilita drag'n'drop 
+        dnd.add_dragable(self.entry_dir) # implementa drag'n'drop para self.entry_dir
         # self.entry_dir.insert(0, os.getcwd())
         self.button_dir = tk.Button(self, text='>', image=self.icon, bg='#31363b', fg='white',
                                     command=self.define_arquivo, pady=2)
@@ -72,6 +75,8 @@ class Application(tk.Frame):
     def testa_e_executa(self,event=None):
         '''verifica a validade dos parâmetros e chama o método de busca de arquivos'''
         self.folder = os.path.dirname(self.entry_dir.get())
+        if self.folder[:-4] != '.csv':
+            self.texto_saida['text'] = 'Exxtensão de arquivo inválida'
         try:
             os.chdir(self.folder)  # altera o diretório de trabalho para a pasta 'folder'
             self.processa_arquivo_csv()
