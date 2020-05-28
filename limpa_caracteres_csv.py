@@ -6,6 +6,7 @@ import os
 import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import filedialog
+from tkinter import messagebox
 import ToolTip as tt
 import DragManager as dg
 
@@ -42,8 +43,8 @@ class Application(tk.Frame):
         tk.Button(self.master, text='Executar', anchor='n', bg='#31363b', fg='white',
                                     command=self.testa_e_executa).pack(pady=5)
         # self.separator = ttk.Separator(self.master, orient=tk.HORIZONTAL).pack(fill='x')
-        self.texto_saida = tk.Label(self.master, text='', fg='black', bg='gray')
-        self.texto_saida.pack()
+        # self.texto_saida = tk.Label(self.master, text='', fg='black', bg='gray')
+        # self.texto_saida.pack()
         ##33425c
         self.define_raiz()
 
@@ -54,7 +55,7 @@ class Application(tk.Frame):
         self.master.iconphoto(False, tk.PhotoImage(file='./image/Python-icon.png'))
         # dimensões da janela
         largura = 510
-        altura = 140
+        altura = 120
         # resolução da tela
         largura_screen = self.master.winfo_screenwidth()
         altura_screen = self.master.winfo_screenheight()
@@ -69,37 +70,41 @@ class Application(tk.Frame):
         if self.file is not None:  # Se não foi cancelado
             self.entry_dir.delete(0, 'end')
             self.entry_dir.insert(0, self.file)
+        # if self.file[:-4] != '.csv':
+        #     # self.texto_saida['text'] = 'Extensão de arquivo inválida'
+        #     messagebox.showerror('!', 'Extensão de arquivo inválida')
+        #     return
 
     def testa_e_executa(self,event=None):
         '''verifica a validade dos parâmetros e chama o método de busca de arquivos'''
         self.folder = os.path.dirname(self.entry_dir.get())
-        if self.folder[:-4] != '.csv':
-            self.texto_saida['text'] = 'Exxtensão de arquivo inválida'
         try:
             os.chdir(self.folder)  # altera o diretório de trabalho para a pasta 'folder'
             self.processa_arquivo_csv()
         except FileNotFoundError:
-            self.texto_saida['text'] = "Diretório inválido!"
+            # self.texto_saida['text'] = "Diretório inválido!"
+            messagebox.showerror('!', 'Arquivo inválido')
 
     def _exit(self, event=None):
         self.master.destroy()
 
     def processa_arquivo_csv(self):
         '''processa o arquivo csv e gera um segundo com o resultado do processamento'''
-        self.texto_saida['text'] = ''
+        # self.texto_saida['text'] = ''
         with open(self.file, errors='ignore') as csv_file_object:
-            self.texto_saida['text'] = 'Abrindo arquivo .csv...'
+            # self.texto_saida['text'] = 'Abrindo arquivo .csv...'
             reader_obj = csv.reader(csv_file_object)
             csv_rows = [row for row in reader_obj]
             # print(len(csv_rows))
             # print(csv_rows[:10])
             arquivo_saída = self.file[:-4] + '_tratado.csv'
             with open(arquivo_saída, 'w') as writer_obj:
-                self.texto_saida['text'] = 'Gerando saída...'
+                # self.texto_saida['text'] = 'Gerando saída...'
                 out_writer = csv.writer(writer_obj, delimiter=self.separador.get() ,quoting=csv.QUOTE_ALL, lineterminator='\n')
                 for row in csv_rows:
                     out_writer.writerow(row)
-        self.texto_saida['text'] = 'Feito!'
+        # self.texto_saida['text'] = 'Feito!'
+        messagebox.showinfo('','Feito!')
 
 def limpa_caracteres_csv():
     '''busca arquivos de valor maior ou igual a um valor dado em um diretório'''
