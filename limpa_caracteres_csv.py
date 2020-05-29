@@ -53,8 +53,11 @@ class Application(tk.Frame):
         tt.ToolTip(self.final_linha,
                    'Selecione a configuração de final de linha')
         # fora do Frame
-        tk.Button(self.master, text='Executar', anchor='n', bg='#31363b', fg='white',
-                                    command=self.testa_e_executa).pack(pady=5)
+        self.executa = tk.Button(self.master, text='Executar', anchor='n', bg='#31363b', fg='white',
+                                    command=self.testa_e_executa)
+        self.executa.pack(pady=5)
+        tt.ToolTip(self.executa,
+                   'Gera o arquivo alterado e salva com o sufixo "...tratado.csv"')
         # self.separator = ttk.Separator(self.master, orient=tk.HORIZONTAL).pack(fill='x')
         # self.texto_saida = tk.Label(self.master, textvariable=self.texto_var, fg='black', bg='gray')
         # self.texto_saida.pack()
