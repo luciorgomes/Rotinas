@@ -17,7 +17,6 @@ class Application(tk.Frame):
         super().__init__(master)
         self.folder = ''
         self.master = master
-        # self.texto_var = tk.StringVar()
         self.icon = tk.PhotoImage(file='./image/Folder-icon.png')
         self.pack()
         self.configure(bg='gray')
@@ -58,10 +57,6 @@ class Application(tk.Frame):
         self.executa.pack(pady=5)
         tt.ToolTip(self.executa,
                    'Gera o arquivo alterado e salva com o sufixo "...tratado.csv"')
-        # self.separator = ttk.Separator(self.master, orient=tk.HORIZONTAL).pack(fill='x')
-        # self.texto_saida = tk.Label(self.master, textvariable=self.texto_var, fg='black', bg='gray')
-        # self.texto_saida.pack()
-        # ##33425c
         self.define_raiz()
 
     def define_raiz(self):
@@ -84,7 +79,6 @@ class Application(tk.Frame):
 
     def define_arquivo(self, event=None):
         '''chama o filedialog do Tkinter para definir o arquivo'''
-        # self.file = filedialog.askopenfilename(initialdir = "/",title = "Selecione arquivo csv", filetypes=[("Csv files", ".csv")])
         self.file = filedialog.askopenfilename(
             title="Selecione arquivo csv", filetypes=[("Csv files", ".csv")])
         if self.file is not None:  # Se não foi cancelado
@@ -99,7 +93,6 @@ class Application(tk.Frame):
             os.chdir(self.folder)
             self.processa_arquivo_csv()
         except FileNotFoundError:
-            # self.texto_var.set("Arquivo inválido!")
             messagebox.showerror('Erro!', 'Arquivo Inválido')
 
     def _exit(self, event=None):
@@ -107,20 +100,14 @@ class Application(tk.Frame):
 
     def processa_arquivo_csv(self):
         '''processa o arquivo csv e gera um segundo com o resultado do processamento'''
-        # self.texto_var.set('')
-        # with open(self.file, errors='ignore') as csv_file_object:
         with open(self.file, errors='ignore', encoding='latin-1') as csv_file_object:
-            # self.texto_var.set('Abrindo arquivo .csv...')
             reader_obj = csv.reader(csv_file_object)
-            # csv_rows = []
-            # for row in reader_obj:
             csv_rows = [[item.replace('\n', '').replace('"', '')
                          for item in list] for list in reader_obj]
             # print(len(csv_rows))
             # print(csv_rows[222:227])
             arquivo_saída = self.file[:-4] + '_tratado.csv'
             with open(arquivo_saída, 'w', encoding='latin-1') as writer_obj:
-                # self.texto_var.set('Gerando saída...')
                 if self.final_linha.get() == 'CR LF':
                     out_writer = csv.writer(
                         writer_obj, delimiter=self.separador.get(), quoting=csv.QUOTE_ALL)
@@ -129,7 +116,6 @@ class Application(tk.Frame):
                                             lineterminator='\n')
                 for r in csv_rows:
                     out_writer.writerow(r)
-        # self.texto_var.set('Feito!')
         messagebox.showinfo('!', 'Feito!')
 
 
