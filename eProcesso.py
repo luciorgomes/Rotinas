@@ -104,12 +104,12 @@ class Application(tk.Frame):
         self.bt_abre_cx_trab = tk.Button(self, style_button ,text='Abre e-Processo',
                                          command=self.abre_e_processo)
         self.bt_abre_cx_trab.grid(row=20, column=0, columnspan=6)
-        tt.ToolTip(self.bt_abre_cx_trab, 'Abre a caixa de trabalho de equipe no e-Processo')
+        tt.ToolTip(self.bt_abre_cx_trab, 'Abre a tela de login para o e-Processo')
 
         self.bt_abre_cx_trab_antiga = tk.Button(self, style_button ,text='Abre Caixa de Trabalho',
                                          command=self.abre_caixa_trabalho)
         self.bt_abre_cx_trab_antiga.grid(row=21, column=0, columnspan=6)
-        tt.ToolTip(self.bt_abre_cx_trab_antiga, 'Abre a caixa de trabalho de equipe antiga no e-Processo')
+        tt.ToolTip(self.bt_abre_cx_trab_antiga, 'Abre a caixa de trabalho de equipe no e-Processo')
 
         self.bt_abre_ger = tk.Button(self, style_button, text='Abre Gerencial de Estoque',
                   command=self.abre_gerencial_estoque)
