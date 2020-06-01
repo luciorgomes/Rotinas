@@ -50,7 +50,7 @@ class Application(tk.Frame):
         self.check_sublinhado.grid(row=1, column=3)
         ttk.Label(self, text='Cor:', style='BG.TLabel').grid(row=2, column=1, sticky='e')
         self.combo_color = ttk.Combobox(self, values=['Normal', 'Azul', 'Verde','Vermelho' ], style='Combo.TCombobox',
-                                        exportselection=0)
+                                        exportselection=0, width=10)
         self.combo_color.grid(row=2, column=2)
         self.combo_color.set('Normal')
         self.texto_nota = tk.Text(self, width=55, height=5, bg='#33425c', fg='orange', font='Arial 10',
