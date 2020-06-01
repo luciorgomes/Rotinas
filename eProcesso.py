@@ -101,13 +101,13 @@ class Application(tk.Frame):
 
         # Abre funcionalidades
         ttk.Label(self, text='Abre funções / processos',style='Title.TLabel').grid(row=19, columnspan=6)
-        self.bt_abre_cx_trab = tk.Button(self, style_button ,text='Abre Caixa de Trabalho',
-                                         command=self.abre_caixa_trabalho)
+        self.bt_abre_cx_trab = tk.Button(self, style_button ,text='Abre e-Processo',
+                                         command=self.abre_e_processo)
         self.bt_abre_cx_trab.grid(row=20, column=0, columnspan=6)
         tt.ToolTip(self.bt_abre_cx_trab, 'Abre a caixa de trabalho de equipe no e-Processo')
 
-        self.bt_abre_cx_trab_antiga = tk.Button(self, style_button ,text='Abre Caixa de Trabalho antiga',
-                                         command=self.abre_caixa_trabalho_antiga)
+        self.bt_abre_cx_trab_antiga = tk.Button(self, style_button ,text='Abre Caixa de Trabalho',
+                                         command=self.abre_caixa_trabalho)
         self.bt_abre_cx_trab_antiga.grid(row=21, column=0, columnspan=6)
         tt.ToolTip(self.bt_abre_cx_trab_antiga, 'Abre a caixa de trabalho de equipe antiga no e-Processo')
 
@@ -240,11 +240,11 @@ class Application(tk.Frame):
                                 '\n\nRelação transposta copiada para a memória (cole com Ctrl+v)\n\n')
         self.texto_saida.see(tk.END)
 
+    def abre_e_processo(self, event=None):
+        webbrowser.open('https://eprocesso.suiterfb.receita.fazenda/')
+
     def abre_caixa_trabalho(self, event=None):
         webbrowser.open('https://eprocesso.suiterfb.receita.fazenda/eprocesso/index.html#/ngx/caixa-trabalho-equipe')
-
-    def abre_caixa_trabalho_antiga(self, event=None):
-        webbrowser.open('https://eprocesso.suiterfb.receita.fazenda/ControleAcessarCaixaTrabalho.asp?psAcao=apresentarPagina&psLimpaEquipe=1')
 
     def abre_gerencial_estoque(self, event=None):
         webbrowser.open("https://eprocesso.suiterfb.receita.fazenda/relatorios/ControleManterVisao.asp?psAcao=exibir")
