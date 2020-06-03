@@ -1,13 +1,14 @@
 #! /usr/bin/python3
 # limpa_caracteres_csv.py - Limpa caracteres espúrios de arquivo csv.
 
-import csv
 import os
 import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import filedialog
 import ToolTip as tt
 from tkinter import messagebox
+import re
+import io
 
 
 class Application(tk.Frame):
@@ -38,19 +39,19 @@ class Application(tk.Frame):
         tt.ToolTip(self.button_dir, 'Clique para selecionar o arquivo csv')
         tk.Label(self, text='Separador:', bg='gray', fg='black').grid(
             row=1, column=0, columnspan=2, sticky='e', padx=5)
-        tk.Label(self, text='Final de linha:', bg='gray', fg='black').grid(
-            row=2, column=0, columnspan=2, sticky='e', padx=5)
+        # tk.Label(self, text='Final de linha:', bg='gray', fg='black').grid(
+        #     row=2, column=0, columnspan=2, sticky='e', padx=5)
         self.separador = ttk.Combobox(
-            self, values=[',', ';'], state="readonly", width=5)
+            self, values=[';', ','], state="readonly", width=10)
         self.separador.current(0)
         self.separador.grid(row=1, column=2, columnspan=2, sticky='w')
         tt.ToolTip(self.separador, 'Selecione o separador')
-        self.final_linha = ttk.Combobox(
-            self, values=['CR LF', 'LF'], state="readonly", width=5)
-        self.final_linha.current(0)
-        self.final_linha.grid(row=2, column=2, columnspan=2, sticky='w')
-        tt.ToolTip(self.final_linha,
-                   'Selecione a configuração de final de linha')
+        # self.final_linha = ttk.Combobox(
+        #     self, values=['Linux/Mac', 'Windows'], state="readonly", width=10)
+        # self.final_linha.current(1)
+        # self.final_linha.grid(row=2, column=2, columnspan=2, sticky='w')
+        # tt.ToolTip(self.final_linha,
+        #            'Selecione a configuração de final de linha')
         # fora do Frame
         self.executa = tk.Button(self.master, text='Executar', anchor='n', bg='#31363b', fg='white',
                                     command=self.testa_e_executa)
@@ -100,23 +101,23 @@ class Application(tk.Frame):
 
     def processa_arquivo_csv(self):
         '''processa o arquivo csv e gera um segundo com o resultado do processamento'''
-        with open(self.file, errors='ignore', encoding='latin-1') as csv_file_object:
-            reader_obj = csv.reader(csv_file_object)
-            csv_rows = [[item.replace('\n', '').replace('"', '')
-                         for item in list] for list in reader_obj]
-            # print(len(csv_rows))
-            # print(csv_rows[222:227])
+        with io.open(self.file, encoding='latin-1', newline='') as csv_file_object:
+            contents = csv_file_object.read()
+            if self.separador.get() == ';':
+                contents = contents.replace('","', '";"').replace('\r\n"\r\n', '"\r\n')
+            else:
+                contents = contents.replace('\r\n"\r\n', '"\r\n')
+            re_contents = re.sub('(?<!\r)\n','',contents)
+            re_contents = re.sub('(?<!")\r\n','',re_contents)
+            re_contents = re.sub('(?<![;]|\n)["](?![;]|\r)','',re_contents)
+            final_contents = '"' + re_contents
             arquivo_saída = self.file[:-4] + '_tratado.csv'
-            with open(arquivo_saída, 'w', encoding='latin-1') as writer_obj:
-                if self.final_linha.get() == 'CR LF':
-                    out_writer = csv.writer(
-                        writer_obj, delimiter=self.separador.get(), quoting=csv.QUOTE_ALL)
-                else:
-                    out_writer = csv.writer(writer_obj, delimiter=self.separador.get(), quoting=csv.QUOTE_ALL,
-                                            lineterminator='\n')
-                for r in csv_rows:
-                    out_writer.writerow(r)
-        messagebox.showinfo('!', 'Feito!')
+            # o newline corrige o fim de linha no Windows
+            with open(arquivo_saída, 'w', encoding='latin-1', newline='\n') as saida:
+                saida.write(final_contents)
+
+        messagebox.showinfo('!','Feito!')
+
 
 
 def limpa_caracteres_csv():
