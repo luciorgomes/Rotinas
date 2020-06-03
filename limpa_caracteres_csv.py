@@ -42,7 +42,7 @@ class Application(tk.Frame):
         # tk.Label(self, text='Final de linha:', bg='gray', fg='black').grid(
         #     row=2, column=0, columnspan=2, sticky='e', padx=5)
         self.separador = ttk.Combobox(
-            self, values=[';', ','], state="readonly", width=10)
+            self, values=[';', ','], state="readonly", width=5)
         self.separador.current(0)
         self.separador.grid(row=1, column=2, columnspan=2, sticky='w')
         tt.ToolTip(self.separador, 'Selecione o separador')
@@ -68,7 +68,7 @@ class Application(tk.Frame):
             file='./image/Python-icon.png'))
         # dimensões da janela
         largura = 510
-        altura = 120
+        altura = 100
         # resolução da tela
         largura_screen = self.master.winfo_screenwidth()
         altura_screen = self.master.winfo_screenheight()
